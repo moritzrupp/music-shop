@@ -43,7 +43,7 @@ public class Test {
 			transaction = session.beginTransaction();
 
 			Album album1 = (Album) session.createQuery(
-					"from Album where album_id = 1").uniqueResult();
+					"from Album where album_id = 2").uniqueResult();
 			System.out.println(album1);
 			transaction.commit();
 	}
