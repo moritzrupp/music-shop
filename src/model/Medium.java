@@ -1,111 +1,166 @@
 package model;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table( name = "MEDIA" )
 public class Medium {
-	private boolean mIsAudio;
+	private int mId;
 	private String mTitle;
 	private String mInterpreter;
 	private String mDuration;
-	private double mFileSize;
+	private long mFileSize;
 	private String mFileLocation;
 	
-	private int mListened = 0;
-	private int mSelled = 0;
+	private int mListened;
+	private int mSold;
 	
 	private MediaType mMediaType;
 	private Album mAlbum;
 	
-	//TODO Relationships
-
 	public Medium() {
 		super();
 	}
 
-	public boolean ismIsAudio() {
-		return mIsAudio;
+	/**
+	 * @param mTitle The title of the medium.
+	 * @param mInterpreter The interpreter of the medium.
+	 * @param mFileLocation The file location of the medium.
+	 * @param mMediaType The media type.
+	 * @param mAlbum The album of the medium. Can be <tt>null</tt>.
+	 */
+	public Medium(String mTitle, String mInterpreter, String mFileLocation,
+			MediaType mMediaType, Album mAlbum) {
+		super();
+		this.mTitle = mTitle;
+		this.mInterpreter = mInterpreter;
+		this.mFileLocation = mFileLocation;
+		this.mMediaType = mMediaType;
+		this.mAlbum = mAlbum;
+		
+		// TODO calculate filesize and duration from file
+		this.mFileSize = 0;
+		this.mDuration = "1";
+		
+		this.mListened = 0;
+		this.mSold = 0;
 	}
 
-	public void setmIsAudio(boolean mIsAudio) {
-		this.mIsAudio = mIsAudio;
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
+	@Column(name = "MEDIUM_ID", nullable = false)
+	public int getId() {
+		return mId;
+	}
+	
+	public void setId(int mId) {
+		this.mId = mId;
 	}
 
-	public String getmTitle() {
+	@Column(name="TITLE", nullable = false)
+	public String getTitle() {
 		return mTitle;
 	}
 
-	public void setmTitle(String mTitle) {
+	public void setTitle(String mTitle) {
 		this.mTitle = mTitle;
 	}
 
-	public String getmInterpreter() {
+	@Column(name="INTERPRETER", nullable = false)
+	public String getInterpreter() {
 		return mInterpreter;
 	}
-
-	public void setmInterpreter(String mInterpreter) {
+	
+	public void setInterpreter(String mInterpreter) {
 		this.mInterpreter = mInterpreter;
 	}
 
-	public String getmDuration() {
+	@Column(name="DURATION", nullable = false)
+	public String getDuration() {
 		return mDuration;
 	}
 
-	public void setmDuration(String mDuration) {
+	public void setDuration(String mDuration) {
 		this.mDuration = mDuration;
 	}
 
-	public double getmFileSize() {
+	@Column(name="FILESIZE", nullable = false)
+	public long getFileSize() {
 		return mFileSize;
 	}
 
-	public void setmFileSize(double mFileSize) {
+	public void setFileSize(long mFileSize) {
 		this.mFileSize = mFileSize;
 	}
 
-	public String getmFileLocation() {
+	@Column(name="MEDIUM_PATH", nullable = false)
+	public String getFileLocation() {
 		return mFileLocation;
 	}
 
-	public void setmFileLocation(String mFileLocation) {
+	public void setFileLocation(String mFileLocation) {
 		this.mFileLocation = mFileLocation;
 	}
-
-	public int getmListened() {
+	
+	@Column(name="NO_LISTENED", nullable = false)
+	public int getListened() {
 		return mListened;
 	}
 
-	public void setmListened(int mListened) {
+	public void setListened(int mListened) {
 		this.mListened = mListened;
 	}
 
-	public int getmSelled() {
-		return mSelled;
+	@Column(name="NO_SOLD", nullable = false)
+	public int getSold() {
+		return mSold;
 	}
 
-	public void setmSelled(int mSelled) {
-		this.mSelled = mSelled;
+	public void setSold(int mSold) {
+		this.mSold = mSold;
 	}
 
-	public MediaType getmMediaType() {
+	
+	//@Column(name="MEDIA_TYPES_MEDIA_ID", nullable = false)
+//	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name="MEDIA_TYPES_MEDIA_ID", referencedColumnName="MEDIA_ID", nullable = false)
+	public MediaType getMediaType() {
 		return mMediaType;
 	}
 
-	public void setmMediaType(MediaType mMediaType) {
+	public void setMediaType(MediaType mMediaType) {
 		this.mMediaType = mMediaType;
 	}
 
-	public Album getmAlbum() {
+	//@Column(name="ALBUMS_ALBUM_ID", nullable = true)
+//	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name="ALBUMS_ALBUM_ID", referencedColumnName="ALBUM_ID", nullable = true)
+	public Album getAlbum() {
 		return mAlbum;
 	}
 
-	public void setmAlbum(Album mAlbum) {
+	public void setAlbum(Album mAlbum) {
 		this.mAlbum = mAlbum;
 	}
 
 	public String toString() {
-		return "Medium [mIsAudio=" + mIsAudio + ", mTitle=" + mTitle
+		return "Medium [mTitle=" + mTitle
 				+ ", mInterpreter=" + mInterpreter + ", mDuration=" + mDuration
 				+ ", mFileSize=" + mFileSize + ", mFileLocation="
-				+ mFileLocation + ", mListened=" + mListened + ", mSelled="
-				+ mSelled + ", mMediaType=" + mMediaType + ", mAlbum=" + mAlbum
+				+ mFileLocation + ", mListened=" + mListened + ", mSold="
+				+ mSold + ", mMediaType=" + mMediaType + ", mAlbum=" + mAlbum
 				+ "]";
 	}
 

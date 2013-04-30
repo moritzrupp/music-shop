@@ -1,5 +1,15 @@
 package model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table( name = "MEDIA_TYPES" )
 public class MediaType {
 	
 	private int mId;
@@ -10,29 +20,50 @@ public class MediaType {
 		super();
 	}
 	
-	public int getmId() {
+	/**
+	 * @param mName The name of the media type.
+	 * @param mIcon The path to the icon of the media type.
+	 */
+	public MediaType(String mName, String mIcon) {
+		super();
+		this.mName = mName;
+		this.mIcon = mIcon;
+	}
+	
+	@Id 
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
+	@Column(name = "MEDIA_ID", nullable = false)
+	public int getId() {
 		return mId;
 	}
-	public void setmId(int mId) {
+	public void setId(int mId) {
 		this.mId = mId;
 	}
-	public String getmIcon() {
+	
+	@Column(name="ICON_PATH", nullable = false)
+	public String getIcon() {
 		return mIcon;
 	}
 
-	public void setmIcon(String mIcon) {
+	public void setIcon(String mIcon) {
 		this.mIcon = mIcon;
 	}
 
-	public String getmName() {
+	@Column(name="NAME", nullable = false)
+	public String getName() {
 		return mName;
 	}
-	public void setmName(String mName) {
+	public void setName(String mName) {
 		this.mName = mName;
 	}
 
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
 	public String toString() {
-		return ("Type: " + mName + "Icon location: "+ mIcon);
+		return "MediaType [mId=" + mId + ", mName=" + mName + ", mIcon="
+				+ mIcon + "]";
 	}
 }
