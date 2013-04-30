@@ -2,26 +2,24 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory>
-  <!-- Database connection settings -->
-  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/personen</property>
-  <property name="hibernate.connection.username">root</property>
-  <property name="hibernate.connection.password">root</property>
-  <property name="show_sql">true</property>
-  <!-- SQL dialect -->
-  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-  <!-- JDBC connection pool (built-in) -->
-  <property name="connection.pool_size">10</property>
-  <!-- Disable the second-level cache -->
-  <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
-  <!-- Enable Hibernate's automatic session context management -->
-  <property name="current_session_context_class">thread</property>
-  <property name="hibernate.show_sql">false</property>
-  <property name="hibernate.format_sql">false</property>
-  <property name="hibernate.use_sql_comments">false</property>
-  <property name="hibernate.hbm2ddl.auto">create</property>
-  <!-- Mapping files -->
-  <mapping resource="model/Person.hbm.xml"/>
- </session-factory>
+	<session-factory>
+		<!-- Database connection settings -->
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:Oracle:thin:@37.221.193.194:23987</property>
+		<property name="hibernate.connection.username">MUSICSHOP</property>
+		<property name="hibernate.connection.password">b8FyV7qvZLYdmzG3eCM4R</property>
+		<property name="show_sql">true</property>
+		<!-- SQL dialect -->
+		<property name="hibernate.dialect">org.hibernate.dialect.Oracle11gDialect</property>
+		<!-- JDBC connection pool (built-in) -->
+		<property name="connection.pool_size">10</property>
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
+		<property name="hibernate.use_sql_comments">false</property>
+		<property name="hibernate.hbm2ddl.auto">create</property>
+	</session-factory>
 </hibernate-configuration>
