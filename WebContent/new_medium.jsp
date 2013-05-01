@@ -10,7 +10,7 @@
 <h1>New Medium</h1>
 <p>Please enter the data for a new medium.</p>
 
-	<form action="medium_confirmation.jsp">
+	<form action="/control/JSPController">
 		<label for="mediumType">Medium type:</label>
 		<select id="mediumType" name="mediumType">
 			<option value="audio">Audio</option>
@@ -30,8 +30,8 @@
 		<label for="mediumFile">Upload:</label>
 		<input type="file" id="mediumFile" name="mediumFile" accept="audio/*, video/*" /> <br />
 		
-		<button type="reset" name="mediumReset" id="mediumReset" value="Cancel">Cancel</button>
-		<button type="submit" name="mediumSubmit" id="mediumSubmit" value="Submit">Submit</button>
+		<button type="reset" name="mediumCancel" id="mediumCancel" value="Cancel">Cancel</button>
+		<button type="submit" name="mediumConfirm" id="mediumConfirm" value="Submit">Submit</button>
 	</form>
 </body>
 </html>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>New Type</h1>
-<form action="type_confirmation.jsp">
+<form>
 <p>You have entered the following data:</p>
 <label for="newType">New type: </label>
 <input disabled="disabled" type="text" id="newType" name="newType" value="${ param.newType }"><br>

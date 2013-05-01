@@ -9,4 +9,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+  	<servlet-name>JSPController</servlet-name>
+  	<servlet-class>control.JSPController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>JSPController</servlet-name>
+  	<url-pattern>/control/JSPController</url-pattern>
+  </servlet-mapping>
 </web-app>
