@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
-import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table( name = "MEDIA" )
@@ -165,7 +164,7 @@ public class Medium {
 				+ ", mInterpreter=" + mInterpreter + ", mDuration=" + mDuration
 				+ ", mFileSize=" + mFileSize + ", mFileLocation="
 				+ mFileLocation + ", mListened=" + mListened + ", mSold="
-				+ mSold + ", mMediaType=" + mMediaType + ", mAlbum=" + mAlbum.getName()
+				+ mSold + ", mMediaType=" + mMediaType + ((mAlbum != null) ? ", mAlbum=" + mAlbum.getName() : "")
 				+ "]";
 	}
 

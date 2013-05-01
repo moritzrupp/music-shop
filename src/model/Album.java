@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -103,7 +104,7 @@ public class Album {
 	 * @return the mMediaList
 	 * TODO Es muss programmatisch kontrolliert werden, dass mindestens ein Titel im Album enthalten ist.
 	 */
-	@OneToMany(mappedBy="album")
+	@OneToMany(mappedBy="album", fetch=FetchType.EAGER)
 	public List<Medium> getMediaList() {
 	
 		return mMediaList;
