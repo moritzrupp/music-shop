@@ -17,7 +17,6 @@ public class SQLControllerTest {
 	
 	@Before
 	public void setUp() {
-		
 		controller = new SQLController();
 	}
 
