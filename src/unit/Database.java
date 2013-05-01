@@ -36,7 +36,7 @@ public class Database {
 		}
 	}
 
-	// @Test
+	 @Test
 	public void loadTestData() {
 
 		Session session = null;
@@ -52,20 +52,18 @@ public class Database {
 			System.out.println(album1);
 
 			session.getTransaction().commit();
-			session.close();
 		} catch (Exception e) {
 
 			if (session != null) {
 
 				session.getTransaction().rollback();
-				session.close();
 			}
 
 			e.getStackTrace();
 		}
 	}
 
-	@Test
+//	@Test
 	public void insertData() {
 
 		Session session = null;
@@ -84,6 +82,7 @@ public class Database {
 			session = sessionFactory.getCurrentSession();
 			session.beginTransaction();
 			mp3Id = (Integer) session.save(mp3);
+//			System.out.println("MP3-ID: " + mp3Id);
 			session.getTransaction().commit();
 			System.out.println("Media type successful stored.");
 		} catch (Exception e) {

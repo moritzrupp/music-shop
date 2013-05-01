@@ -4,15 +4,15 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Table( name = "MEDIA" )
@@ -60,10 +60,12 @@ public class Medium {
 
 	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
 	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
 //	@GenericGenerator(name = "generator", strategy = "sequence-identity", parameters = @Parameter(name = "sequence", value = "MEDIA_PK_SEQ"))
 //    @GeneratedValue(generator = "generator")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "media_seq")
-	@SequenceGenerator(name = "media_seq", sequenceName = "MEDIA_PK_SEQ", allocationSize=1)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "media_seq")
+//	@SequenceGenerator(name = "media_seq", sequenceName = "MEDIA_PK_SEQ", allocationSize=1)
 	@Column(name = "MEDIUM_ID", nullable = false)
 	public int getId() {
 		return mId;

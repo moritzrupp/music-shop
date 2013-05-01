@@ -6,11 +6,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table( name = "ALBUMS" )
@@ -20,7 +20,7 @@ public class Album {
 	private String mInterpreter;
 	private String mCoverPicture;
 	
-	private List<Medium> mediaList;
+	private List<Medium> mMediaList;
 	
 	public Album() {
 		super();
@@ -30,7 +30,7 @@ public class Album {
 	 * @param mName The name of the album.
 	 * @param mInterpreter The interpreter of the album.
 	 * @param mCoverPicture The path to the cover picture of the album.
-	 * @param mediaList The list of media files of the album. Can be <tt>null</tt>.
+	 * @param mMediaList The list of media files of the album. Can be <tt>null</tt>.
 	 */
 	public Album(String mName, String mInterpreter, String mCoverPicture,
 			List<Medium> mediaList) {
@@ -40,9 +40,9 @@ public class Album {
 		this.mCoverPicture = mCoverPicture;
 		
 		if(mediaList == null)
-			this.mediaList = new LinkedList<Medium>();
+			this.mMediaList = new LinkedList<Medium>();
 		else
-			this.mediaList = mediaList;
+			this.mMediaList = mediaList;
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class Album {
 	 */
 	public void addMediumToAlbum(Medium medium) {
 		
-		this.mediaList.add(medium);
+		this.mMediaList.add(medium);
 		medium.setAlbum(this);
 	}
 	
@@ -60,10 +60,12 @@ public class Album {
 	
 	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
 	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
 //	@GenericGenerator(name = "generator", strategy = "sequence-identity", parameters = @Parameter(name = "sequence", value = "ALBUMS_PK_SEQ"))
 //    @GeneratedValue(generator = "generator")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "albums_seq")
-	@SequenceGenerator(name = "albums_seq", sequenceName = "ALBUMS_PK_SEQ", allocationSize=1)
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "albums_seq")
+//	@SequenceGenerator(name = "albums_seq", sequenceName = "ALBUMS_PK_SEQ", allocationSize=1)
 	@Column(name = "ALBUM_ID", nullable = false)
 	public int getId() {
 	
@@ -98,13 +100,13 @@ public class Album {
 	}
 	
 	/**
-	 * @return the mediaList
+	 * @return the mMediaList
 	 * TODO Es muss programmatisch kontrolliert werden, dass mindestens ein Titel im Album enthalten ist.
 	 */
 	@OneToMany(mappedBy="album")
 	public List<Medium> getMediaList() {
 	
-		return mediaList;
+		return mMediaList;
 	}
 
 	/**
@@ -140,11 +142,11 @@ public class Album {
 	}
 
 	/**
-	 * @param mediaList the mediaList to set
+	 * @param mMediaList the mMediaList to set
 	 */
 	public void setMediaList(List<Medium> mediaList) {
 	
-		this.mediaList = mediaList;
+		this.mMediaList = mediaList;
 	}
 
 	/* (non-Javadoc)
@@ -153,8 +155,8 @@ public class Album {
 	@Override
 	public String toString() {
 		return "Album [mId=" + mId + ", mName=" + mName + ", mInterpreter="
-				+ mInterpreter + ", mCoverPicture=" + mCoverPicture + 
-				mediaList + "]";
+				+ mInterpreter + ", mCoverPicture=" + mCoverPicture + " mMediaList="
+				+ mMediaList + "]";
 	}	
 }
 
