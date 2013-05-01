@@ -1,16 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>New medium</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>New Medium</title>
 </head>
 <body>
-	<h1>New medium</h1>
-	<form>
+<h1>New Medium</h1>
+<p>Please enter the data for a new medium.</p>
+
+	<form action="medium_confirmation.jsp">
 		<label for="mediumType">Medium type:</label>
 		<select id="mediumType" name="mediumType">
-			<option>Audio</option>
-			<option>Video</option>
+			<option value="audio">Audio</option>
+			<option value="video">Video</option>
 		</select> <br />
 		
 		<label for="mediumTitle">Title:</label>
@@ -19,7 +23,7 @@
 		<label for="mediumInterpreter">Interpreter:</label>
 		<input type="text" id="mediumInterpreter" name="mediumInterpreter" value="" /> <br />
 		
-		<input type="checkbox" id="mediumIsInAlbum" name="mediumIsInAlbum" />Is in album? <br />
+		<input type="checkbox" id="mediumIsInAlbum" name="mediumIsInAlbum" value="checked" />Is in album? <br />
 		<label for="mediumAlbum"></label>
 		<input type="text" id="mediumAlbum" name="mediumAlbum" value="" /><br />
 		

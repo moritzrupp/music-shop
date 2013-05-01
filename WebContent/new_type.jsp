@@ -1,7 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>New Type</title>
 </head>
 <body>
@@ -9,16 +11,14 @@
 <p>
 Type in the textbox the new type you want to create and click on submit.
 </p>
-<form action="">
+<form action="type_confirmation.jsp">
 <label for="newType">New type: </label>
 <input type="text" id="newType" name="newType"><br>
 <label for="icon">Icon: </label>
-<img border="0" src="" alt="Icon" width="25" height="25">
 <input type="file" id="coverPicture" name="coverPicture" accept="image/*" /> <br />
 
-<button type="button" name="reset" id="reset">Reset</button>
+<button type="reset" name="reset" id="reset">Reset</button>
 <button type="submit" name="confirmButton" id="confirmButton">Submit</button>
-
 </form>
 </body>
 </html>
