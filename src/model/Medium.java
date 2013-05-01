@@ -4,12 +4,15 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table( name = "MEDIA" )
@@ -55,9 +58,12 @@ public class Medium {
 		this.mSold = 0;
 	}
 
+	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
 	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy = "increment")
+//	@GenericGenerator(name = "generator", strategy = "sequence-identity", parameters = @Parameter(name = "sequence", value = "MEDIA_PK_SEQ"))
+//    @GeneratedValue(generator = "generator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "media_seq")
+	@SequenceGenerator(name = "media_seq", sequenceName = "MEDIA_PK_SEQ", allocationSize=1)
 	@Column(name = "MEDIUM_ID", nullable = false)
 	public int getId() {
 		return mId;
@@ -130,11 +136,9 @@ public class Medium {
 		this.mSold = mSold;
 	}
 
-	
-	//@Column(name="MEDIA_TYPES_MEDIA_ID", nullable = false)
-//	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@ManyToOne
 	@JoinColumn(name="MEDIA_TYPES_MEDIA_ID", referencedColumnName="MEDIA_ID", nullable = false)
+//	@NotNull
 	public MediaType getMediaType() {
 		return mMediaType;
 	}
@@ -143,15 +147,14 @@ public class Medium {
 		this.mMediaType = mMediaType;
 	}
 
-	//@Column(name="ALBUMS_ALBUM_ID", nullable = true)
-//	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@ManyToOne
 	@JoinColumn(name="ALBUMS_ALBUM_ID", referencedColumnName="ALBUM_ID", nullable = true)
+	@NotFound(action=NotFoundAction.IGNORE)
 	public Album getAlbum() {
 		return mAlbum;
 	}
 
-	public void setAlbum(Album mAlbum) {
+	protected void setAlbum(Album mAlbum) {
 		this.mAlbum = mAlbum;
 	}
 
@@ -160,7 +163,7 @@ public class Medium {
 				+ ", mInterpreter=" + mInterpreter + ", mDuration=" + mDuration
 				+ ", mFileSize=" + mFileSize + ", mFileLocation="
 				+ mFileLocation + ", mListened=" + mListened + ", mSold="
-				+ mSold + ", mMediaType=" + mMediaType + ", mAlbum=" + mAlbum
+				+ mSold + ", mMediaType=" + mMediaType + ", mAlbum=" + mAlbum.getName()
 				+ "]";
 	}
 

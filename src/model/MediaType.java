@@ -3,10 +3,10 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table( name = "MEDIA_TYPES" )
@@ -30,9 +30,12 @@ public class MediaType {
 		this.mIcon = mIcon;
 	}
 	
-	@Id 
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy = "increment")
+	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
+	@Id
+//	@GenericGenerator(name = "generator", strategy = "sequence-identity", parameters = @Parameter(name = "sequence", value = "MEDIA_TYPES_PK_SEQ"))
+//    @GeneratedValue(generator = "generator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "media_type_seq")
+	@SequenceGenerator(name = "media_type_seq", sequenceName = "MEDIA_TYPES_PK_SEQ", allocationSize=1)
 	@Column(name = "MEDIA_ID", nullable = false)
 	public int getId() {
 		return mId;

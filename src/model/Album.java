@@ -6,11 +6,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table( name = "ALBUMS" )
@@ -45,12 +45,25 @@ public class Album {
 			this.mediaList = mediaList;
 	}
 
-	/*
+	/**
+	 * @param medium The medium to add to the album.
+	 */
+	public void addMediumToAlbum(Medium medium) {
+		
+		this.mediaList.add(medium);
+		medium.setAlbum(this);
+	}
+	
+	/**
 	 * @return the mId
-	*/
+	 */
+	
+	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
 	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy = "increment")
+//	@GenericGenerator(name = "generator", strategy = "sequence-identity", parameters = @Parameter(name = "sequence", value = "ALBUMS_PK_SEQ"))
+//    @GeneratedValue(generator = "generator")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "albums_seq")
+	@SequenceGenerator(name = "albums_seq", sequenceName = "ALBUMS_PK_SEQ", allocationSize=1)
 	@Column(name = "ALBUM_ID", nullable = false)
 	public int getId() {
 	
@@ -86,8 +99,9 @@ public class Album {
 	
 	/**
 	 * @return the mediaList
+	 * TODO Es muss programmatisch kontrolliert werden, dass mindestens ein Titel im Album enthalten ist.
 	 */
-	@OneToMany(mappedBy="album") // , cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="album")
 	public List<Medium> getMediaList() {
 	
 		return mediaList;
@@ -139,7 +153,8 @@ public class Album {
 	@Override
 	public String toString() {
 		return "Album [mId=" + mId + ", mName=" + mName + ", mInterpreter="
-				+ mInterpreter + ", mCoverPicture=" + mCoverPicture +"]";
+				+ mInterpreter + ", mCoverPicture=" + mCoverPicture + 
+				mediaList + "]";
 	}	
 }
 
