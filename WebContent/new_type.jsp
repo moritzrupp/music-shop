@@ -11,7 +11,7 @@
 <p>
 Type in the textbox the new type you want to create and click on submit.
 </p>
-<form action="/control/JSPController">
+<form action="control/JSPController">
 <label for="newType">New type: </label>
 <input type="text" id="newType" name="newType"><br>
 <label for="icon">Icon: </label>

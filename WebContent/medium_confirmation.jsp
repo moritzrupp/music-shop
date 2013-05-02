@@ -10,6 +10,7 @@
 </head>
 <body>
 	<form>
+		<h1>Confirm the New Medium</h1>
 		<p>You have entered the following medium data:</p>
 
 		<label for="mediumType">Medium type:</label> <select
@@ -48,10 +49,10 @@
 			disabled="disabled" type="file" id="mediumFile" name="mediumFile"
 			accept="audio/*, video/*" />  --><br />
 
-		<!-- <button type="reset" name="mediumReset" id="mediumReset"
-			value="Cancel">Cancel</button>
-		<button type="submit" name="mediumSubmit" id="mediumSubmit"
-			value="Submit">Submit</button>  -->
+		<button type="button" name="mediumBack" id="mediumBack"
+			>Back</button>
+		<button type="submit" name="mediumNext" id="mediumNext"
+			>Next</button>
 	</form>
 </body>
 </html>

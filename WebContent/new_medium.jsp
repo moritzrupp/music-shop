@@ -10,7 +10,7 @@
 <h1>New Medium</h1>
 <p>Please enter the data for a new medium.</p>
 
-	<form action="/control/JSPController">
+	<form action="control/JSPController">
 		<label for="mediumType">Medium type:</label>
 		<select id="mediumType" name="mediumType">
 			<option value="audio">Audio</option>

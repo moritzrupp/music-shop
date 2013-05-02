@@ -21,8 +21,8 @@
 			for="coverPicture">Cover picture: </label> <img border="0" src=""
 			alt="Cover picture" width="100" height="100"> <br />
 
-		<!-- <button type="reset" name="cancel" id="cancel">Cancel</button>
-		<button type="submit" name="confirmButton" id="confirmButton">Submit</button>  -->
+		<button type="button" name="albumBack" id="albumBack">Back</button>
+		<button type="submit" name="albumNext" id="albumNext">Next</button>
 	</form>
 </body>
 </html>

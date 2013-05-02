@@ -11,7 +11,7 @@
 	<h1>New Album</h1>
 	<p>Fill out the form beneath and click submit, to create a new
 		album.</p>
-	<form action="/control/JSPController">
+	<form action="control/JSPController">
 		<label for="title">Name: </label> <input type="text" id="name"
 			name="name"><br> <label for="interpreter">Interpreter:
 		</label> <input type="text" id="interpreter" name="interpreter"><br>
