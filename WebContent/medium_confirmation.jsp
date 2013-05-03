@@ -14,7 +14,7 @@
 		<p>You have entered the following medium data:</p>
 
 		<label for="mediumType">Medium type:</label> <select
-			disabled="disabled" id="mediumType" name="mediumType">
+			id="mediumType" name="mediumType">
 
 			<core:choose>
 				<core:when test="${ param.mediumType == 'audio' }">
@@ -27,29 +27,29 @@
 				</core:otherwise>
 			</core:choose>
 		</select> <br /> <label for="mediumTitle">Title:</label> <input
-			disabled="disabled" type="text" id="mediumTitle" name="mediumTitle"
+			readonly="readonly" type="text" id="mediumTitle" name="mediumTitle"
 			value="${ param.mediumTitle }" /> <br /> <label
 			for="mediumInterpreter">Interpreter:</label> <input
-			disabled="disabled" type="text" id="mediumInterpreter"
+			readonly="readonly" type="text" id="mediumInterpreter"
 			name="mediumInterpreter" value="${ param.mediumInterpreter }" /> <br />
 
 		<core:choose>
-			<core:when test="${ param.mediumIsInAlbum == 'checked' }">
-				<input disabled="disabled" type="checkbox" id="mediumIsInAlbum"
+			<core:when test="${ param.mediumIsInAlbum == 'on' }">
+				<input readonly="readonly" type="checkbox" id="mediumIsInAlbum"
 					name="mediumIsInAlbum" value="checked" checked />
 			</core:when>
 			<core:otherwise>
-				<input disabled="disabled" type="checkbox" id="mediumIsInAlbum"
+				<input readonly="readonly" type="checkbox" id="mediumIsInAlbum"
 					name="mediumIsInAlbum" value="checked" />
 			</core:otherwise>
 		</core:choose>
 		Is in album? <br /> <label for="mediumAlbum"></label> <input
-			disabled="disabled" type="text" id="mediumAlbum" name="mediumAlbum"
+			readonly="readonly" type="text" id="mediumAlbum" name="mediumAlbum"
 			value="${ param.mediumAlbum }" /><br /> <!-- <label for="mediumFile">Upload:</label> <input
 			disabled="disabled" type="file" id="mediumFile" name="mediumFile"
 			accept="audio/*, video/*" />  --><br />
 
-		<button type="button" name="mediumBack" id="mediumBack"
+		<button type="submit" name="mediumBack" id="mediumBack"
 			>Back</button>
 		<button type="submit" name="mediumNext" id="mediumNext"
 			>Next</button>

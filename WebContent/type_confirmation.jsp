@@ -12,11 +12,11 @@
 <h1>Confirm the New type</h1>
 <p>You have entered the following data:</p>
 <label for="newType">New type: </label>
-<input disabled="disabled" type="text" id="newType" name="newType" value="${ param.newType }"><br>
+<input readonly="readonly" type="text" id="newType" name="newType" value="${ param.newType }"><br>
 <label for="icon">Icon: </label>
 <img border="0" src="" alt="Icon" width="25" height="25"> <br />
 
-<button type="button" name="typeBack" id="typeBack">Back</button>
+<button type="submit" name="typeBack" id="typeBack">Back</button>
 <button type="submit" name="typeNext" id="typeNext">Next</button>
 </form>
 </body>

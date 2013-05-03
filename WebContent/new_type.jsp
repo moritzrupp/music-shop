@@ -11,9 +11,9 @@
 <p>
 Type in the textbox the new type you want to create and click on submit.
 </p>
-<form action="control/JSPController">
+<form action="JSPController">
 <label for="newType">New type: </label>
-<input type="text" id="newType" name="newType"><br>
+<input type="text" id="newType" name="newType" value="${ param.newType }"><br>
 <label for="icon">Icon: </label>
 <input type="file" id="coverPicture" name="coverPicture" accept="image/*" /> <br />
 
