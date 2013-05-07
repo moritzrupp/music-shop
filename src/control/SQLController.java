@@ -19,6 +19,49 @@ import org.hibernate.Session;
 public class SQLController {
 
 	/**
+	 * Saves an object in the database.
+	 * 
+	 * @param obj The object to save.
+	 * @return Returns the id of the saved object.
+	 */
+	public int saveObject(Object obj) {
+		
+		int id;
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		id = (Integer)session.save(obj);
+		session.getTransaction().commit();
+		
+		return id;
+	}
+	
+	/**
+	 * Reads an object from the database.
+	 * 
+	 * @param className The name of the class of the object.
+	 * @param id The id of the object.
+	 * @return The object or <tt>nnull</tt> if the object does not exist.
+ 
+	 */
+	public Object getObjectById(String className, int id) {
+		
+		Object result = null;
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		try {
+			result = session.get(Class.forName(className).getClass(), id);
+			session.getTransaction().commit();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			session.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
 	 * Fetches all media in the database.
 	 * 
 	 * @return A list with all {@link Medium} objects. <tt>null</tt> if the list

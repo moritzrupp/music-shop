@@ -1,5 +1,6 @@
 package control;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -8,50 +9,80 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Album;
+import model.MediaType;
+import model.Medium;
+
 public class JSPController extends HttpServlet {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7854143742430191264L;
-
+	private SQLController sqlController = new SQLController();
+	
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String address = "";
 
 		if (request.getParameter("mediumConfirm") != null) {
 
-			address = "/medium_confirmation.jsp";
+				address = "/medium_confirmation.jsp";
+				
+				File file = new File("/storage/files/" + request.getParameter("mediumInterpreter") + "/" + request.getParameter("mediumTitle") + "." + ((MediaType)sqlController.getObjectById("MediaType", 0)).getName(), request.getParameter("mediumFile"));
+				
+				Medium medium;
+				medium = new Medium(request.getParameter("mediumTitle"), request.getParameter("mediumInterpreter"), file.getCanonicalPath(), (MediaType)sqlController.getObjectById("MediaType", 0), (Album)sqlController.getObjectById("Album", 0)); //TODO IDs have to be changed.
+				request.getSession().setAttribute("toDatabase", medium);
+				request.getSession().setAttribute("file", file);
 		} else if (request.getParameter("mediumBack") != null) {
 			
-			address = "/new_medium.jsp?mediumTitle="+request.getParameter("mediumTitle")
-					+"&mediumInterpreter="+request.getParameter("mediumInterpreter")
-					+"&mediumIsInAlbum="+request.getParameter("mediumIsInAlbum")
-					+"&mediumAlbum="+request.getParameter("mediumAlbum")
-					+"&mediumFile="+request.getParameter("mediumFile");
+			address = "/new_medium.jsp";
 		} else if (request.getParameter("typeConfirm") != null) {
 
 			address = "/type_confirmation.jsp";
+			
+			File file = new File("/storage/icons/" + request.getParameter("newType") + ".suffix", request.getParameter("coverPicture"));
+			
+			MediaType type = new MediaType(request.getParameter("newType"), file.getCanonicalPath());
+			request.getSession().setAttribute("toDatabase", type);
+			request.getSession().setAttribute("file", file);
 		} else if (request.getParameter("typeBack") != null) {
 			
-			address = "/new_type.jsp?newType="+request.getParameter("newType");
+			address = "/new_type.jsp";
 		}  else if (request.getParameter("albumConfirm") != null) {
 
 			address = "/album_confirmation.jsp";
-		} else if (request.getParameter("mediumNext") != null) {
+			
+			File file = new File("/storage/covers/" + request.getParameter("interpreter") + "/" + request.getParameter("name") + ".suffix", request.getParameter("coverPicture"));
+
+			Album album = new Album(request.getParameter("name"), request.getParameter("interpreter"), file.getCanonicalPath(), null); //TODO MediumList has to be changed to values.
+			request.getSession().setAttribute("toDatabase", album);
+			request.getSession().setAttribute("file", file);
+		} else if (request.getParameter("albumBack") != null) {
+			
+			address = "/new_album.jsp";
+		}  else if (request.getParameter("mediumNext") != null) {
 
 			address = "/medium_processing.jsp";
+			
+			sqlController.saveObject(request.getSession().getAttribute("toDatabase"));
+			//TODO Write file to filesystem.
 		} else if (request.getParameter("typeNext") != null) {
 
 			address = "/type_processing.jsp";
+			
+			sqlController.saveObject(request.getSession().getAttribute("toDatabase"));
+			//TODO Write file to filesystem.
 		} else if (request.getParameter("albumNext") != null) {
 
 			address = "/album_processing.jsp";
-		} else if (request.getParameter("albumBack") != null) {
 			
-			address = "/new_album.jsp?name="+request.getParameter("name")+"&interpreter="+request.getParameter("interpreter")+"&coverPicture="+request.getParameter("coverPicture");
-		} 
-		System.out.println(address);
+			sqlController.saveObject(request.getSession().getAttribute("toDatabase"));
+			//TODO Write file to filesystem.
+		}
+		System.out.println(address);		
+		System.out.println("From Session: " + request.getSession().getAttribute("toDatabase"));
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 		dispatcher.forward(request, response);
