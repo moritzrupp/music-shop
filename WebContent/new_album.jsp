@@ -12,7 +12,7 @@
 	<h1>New Album</h1>
 	<p>Fill out the form beneath and click submit, to create a new
 		album.</p>
-	<form action="JSPController">
+	<form action="JSPController" enctype="multipart/form-data" method="post">
 		<label for="name">Name: </label> 
 		<input type="text" id="name" name="name" value="${ param.name}"><br> 
 		<label for="interpreter">Interpreter:</label> 

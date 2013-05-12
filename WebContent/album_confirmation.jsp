@@ -11,7 +11,7 @@
 
 	<h1>Confirm the new Album</h1>
 
-	<form>
+	<form action="JSPController" method="post">
 		<p>You have entered the following album data:</p>
 	
 		<label for="title">Name: </label> <input readonly="readonly"
