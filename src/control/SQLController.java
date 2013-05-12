@@ -27,11 +27,15 @@ public class SQLController {
 	public int saveObject(Object obj) {
 		
 		int id;
-		
+		System.out.println("bla1");
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		System.out.println("bla2");
 		session.beginTransaction();
+		System.out.println("bla3");
 		id = (Integer)session.save(obj);
+		System.out.println("bla4");
 		session.getTransaction().commit();
+		System.out.println("bla5");
 		
 		return id;
 	}
