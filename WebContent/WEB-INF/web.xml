@@ -23,6 +23,15 @@
   	<url-pattern>/AlbumProcessing</url-pattern> 
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>MediumProcessing</servlet-name>
+  	<servlet-class>control.MediumProcessing</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MediumProcessing</servlet-name>
+  	<url-pattern>/MediumProcessing</url-pattern> 
+  </servlet-mapping>
+  
   <error-page>
     <error-code>500</error-code>
     <location>/error500.jsp</location>

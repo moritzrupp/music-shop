@@ -22,9 +22,8 @@
 	%>
 		
 		<p>Please enter the data for a new medium.</p>
-		<form action="MediumProcessing">
+		<form action="MediumProcessing" enctype="multipart/form-data" method="post">
 			<label for="mediumType">Medium type:</label>
-		
 			<select id="mediumType" name="mediumType">
 				<% 
 					for(MediaType type : types) {
@@ -36,12 +35,12 @@
 			</select><br />
 			
 			<label for="mediumTitle">Title:</label>
-			<input type="text" id="mediumTitle" name="mediumTitle" value="${ param.mediumTitle }" required /><br />
+			<input type="text" id="mediumTitle" name="mediumTitle" value="${ medium.title }" required /><br />
 			
 			<label for="mediumInterpreter">Interpreter:</label>
-			<input type="text" id="mediumInterpreter" name="mediumInterpreter" value="${ param.mediumInterpreter }" required /><br />
+			<input type="text" id="mediumInterpreter" name="mediumInterpreter" value="${ medium.interpreter }" required /><br />
 					
-			<core:choose>
+			<!-- <core:choose>
 				<core:when test="${param.mediumIsInAlbum=='checked'}">
 					<input type="checkbox" id="mediumIsInAlbum" name="mediumIsInAlbum" checked />
 				</core:when>
@@ -52,13 +51,13 @@
 			
 			 Is in album? <br />
 			<label for="mediumAlbum"></label>
-			<input type="text" id="mediumAlbum" name="mediumAlbum" value="${ param.mediumAlbum }" /><br />
+			<input type="text" id="mediumAlbum" name="mediumAlbum" value="${ param.mediumAlbum }" /><br /> -->
 			
 			<label for="mediumFile">Upload:</label>
-			<input type="file" id="mediumFile" name="mediumFile" accept="audio/*, video/*" value="${ param.mediumFile }" required /><br />
+			<input type="file" id="mediumFile" name="mediumFile" accept="audio/*, video/*" required /><br />
 			
 			<button type="reset" name="mediumCancel" id="mediumCancel" value="Cancel">Cancel</button>
-			<button type="submit" name="mediumConfirm" id="mediumConfirm" value="Submit">Submit</button>
+			<button type="submit" name="mediumSubmit" id="mediumSubmit" value="Submit">Next</button>
 		</form>
 	<%
 		}
