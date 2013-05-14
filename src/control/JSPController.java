@@ -1,11 +1,29 @@
 package control;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.Album;
+
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.FileItemIterator;
+import org.apache.tomcat.util.http.fileupload.FileItemStream;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 public class JSPController extends HttpServlet {
 
@@ -16,11 +34,127 @@ public class JSPController extends HttpServlet {
 	private SQLController sqlController = new SQLController();
 	
 	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String address = "";
-
+		String redirect = "";
+		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		/**
+		 * Get all form fields and store them in a map.
+		 */
+		
+		if(isMultipart) { // The form is encrypted with 'multipart/form-data' in order to upload files.
+		
+			/**
+			 * Album process flow
+			 */
+			
+			FileItemFactory factory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			FileItemIterator items = null;
+			
+			try {
+				
+				items = upload.getItemIterator(request);
+				
+				while(items.hasNext()) {
+					
+					FileItemStream item = items.next();
+					String fieldName = item.getFieldName();
+					InputStream stream = item.openStream();
+					
+					if(item.isFormField()) {
+						
+						paramMap.put(fieldName, writeStreamToString(stream));
+					}
+					else {
+						
+						String root = getServletContext().getRealPath("/");
+						String storagePath = "";
+						String[] suffix = item.getContentType().split("/");
+						String fileName = "";
+						
+						if(fieldName.equals("albumCover")) {
+							
+							storagePath = "covers/" + (String)paramMap.get("albumInterpreter");
+							fileName = (String)paramMap.get("albumName");
+							
+						}
+						else if(fieldName.equals("mediumFile")) {
+							
+							storagePath = "files";
+						}
+						else if(fieldName.equals("typeIcon")) {
+							
+							storagePath = "icons";
+						}
+						
+						File path = new File(root + "storage/" + storagePath);
+												
+						if (!path.exists()) {
+							
+							path.mkdirs();
+	                    }
+												
+						File uploadedFile = new File(path + "/" + fileName + "." + suffix[1]);
+						
+						try {
+							
+							OutputStream os = new FileOutputStream(uploadedFile);
+							
+							IOUtils.copy(stream, os);
+							os.flush();
+							os.close();
+						} catch(IOException ioe) {
+							
+							ioe.printStackTrace();
+						}
+												
+						paramMap.put("file", "storage/" + storagePath + "/" + fileName + "." + suffix[1]);
+					}
+				}
+			} catch (FileUploadException e) {
+				
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		}
+		else {
+			
+			if(request.getParameter("albumEdit") != null) {
+				// TODO on edit, the file has to be deleted.
+				redirect ="/new_album.jsp";
+			}
+			else if(request.getParameter("albumConfirm") != null) {
+				
+				redirect = "/album_processing.jsp";
+			}
+		}
+		
+		/**
+		 * Check which form was filled out
+		 */
+		Object toSession = null;
+		
+		if(paramMap.containsKey("albumSubmit")) {
+			
+			redirect = "/album_confirmation.jsp";
+			
+			Album album = new Album();
+			album.setName((String)paramMap.get("albumName"));
+			album.setInterpreter((String)paramMap.get("albumInterpreter"));
+			album.setCoverPicture((String)(paramMap.get("file").toString()));
+			
+			toSession = album;
+		}
+		
+		request.getSession().setAttribute("file", paramMap.get("file"));
+		request.getSession().setAttribute("toDatabase", toSession);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
+		dispatcher.forward(request, response);
+				
 		/**
 		 * Obsolete
 		 * TODO The process flow has to be rewritten in order to support file upload.
@@ -162,5 +296,20 @@ public class JSPController extends HttpServlet {
 //		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 //		dispatcher.forward(request, response);
 	}
-
+	
+	private String writeStreamToString(InputStream is) {
+		
+		Scanner scanner = new Scanner(is, "UTF-8");
+		scanner.useDelimiter("\\A");
+		
+		String result = "";
+		
+		while(scanner.hasNext()) {
+			
+			result += scanner.next();
+		}
+		
+		scanner.close();
+		return result;
+	}
 }

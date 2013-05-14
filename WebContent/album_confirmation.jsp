@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false" %>
+<%@ page errorPage="error500.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,21 +9,20 @@
 <title>Confirm New Album</title>
 </head>
 <body>
+	<h1>Confirm the New Album</h1>
+	<p>You have entered the following album data:</p>
+	<form action="AlbumProcessing" method="post">
+		<label for="albumName">Name:</label>
+		<input readonly="readonly" type="text" id="albumName" name="albumName" value="${ album.name }" /><br />
+			
+		<label for="albumInterpreter">Interpreter:</label>
+		<input readonly="readonly" type="text" id="albumInterpreter" name="albumInterpreter" value="${ album.interpreter }" /><br />
+		
+		<label for="albumCover">Cover:</label>
+		<img border="0" src="${ sessionScope['cover'] }" alt="Cover of album ${ album.name }" width="100" height="100" /><br />
 
-	<h1>Confirm the new Album</h1>
-
-	<form action="JSPController" method="post">
-		<p>You have entered the following album data:</p>
-	
-		<label for="title">Name: </label> <input readonly="readonly"
-			type="text" id="name" name="name" value="${ param.name }"><br> <label
-			for="interpreter">Interpreter: </label> <input readonly="readonly"
-			type="text" id="interpreter" name="interpreter" value="${ param.interpreter }"><br> <label
-			for="coverPicture">Cover picture: </label> <img border="0" src=""
-			alt="Cover picture" width="100" height="100"> <br />
-
-		<button type="submit" name="albumBack" id="albumBack">Back</button>
-		<button type="submit" name="albumNext" id="albumNext">Next</button>
+		<button type="submit" name="albumEdit" id="albumBack">Edit</button>
+		<button type="submit" name="albumConfirm" id="albumNext">Confirm</button>
 	</form>
 </body>
 </html>

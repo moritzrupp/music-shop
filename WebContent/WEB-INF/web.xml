@@ -2,13 +2,9 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>music-shop</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>/index.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
   	<servlet-name>JSPController</servlet-name>
   	<servlet-class>control.JSPController</servlet-class>
@@ -17,4 +13,18 @@
   	<servlet-name>JSPController</servlet-name>
   	<url-pattern>/JSPController</url-pattern> 
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>AlbumProcessing</servlet-name>
+  	<servlet-class>control.AlbumProcessing</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AlbumProcessing</servlet-name>
+  	<url-pattern>/AlbumProcessing</url-pattern> 
+  </servlet-mapping>
+  
+  <error-page>
+    <error-code>500</error-code>
+    <location>/error500.jsp</location>
+</error-page>
 </web-app>
