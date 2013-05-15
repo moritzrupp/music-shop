@@ -25,6 +25,7 @@ public class Album {
 	
 	public Album() {
 		super();
+		mMediaList = new LinkedList<Medium>();
 	}
 
 	/**

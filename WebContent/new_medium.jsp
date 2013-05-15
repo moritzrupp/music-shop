@@ -1,10 +1,14 @@
 <%@page import="control.SQLController"%>
 <%@page import="model.MediaType"%>
+<%@page import="model.Album"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="core"%>
+
+<core:set var="name" value="${ medium.album.name }" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +20,7 @@
 	<%
 		SQLController sql = new SQLController();
 		List<MediaType> types = sql.getAllMediaTypes();
-		
+		List<Album> albums = sql.getAllAlbums();
 		if(types != null) {
 			
 	%>
@@ -39,19 +43,26 @@
 			
 			<label for="mediumInterpreter">Interpreter:</label>
 			<input type="text" id="mediumInterpreter" name="mediumInterpreter" value="${ medium.interpreter }" required /><br />
-					
-			<!-- <core:choose>
-				<core:when test="${param.mediumIsInAlbum=='checked'}">
-					<input type="checkbox" id="mediumIsInAlbum" name="mediumIsInAlbum" checked />
-				</core:when>
-				<core:otherwise>
-					<input type="checkbox" id="mediumIsInAlbum" name="mediumIsInAlbum"/>
-				</core:otherwise>
-			</core:choose>
-			
-			 Is in album? <br />
+
 			<label for="mediumAlbum"></label>
-			<input type="text" id="mediumAlbum" name="mediumAlbum" value="${ param.mediumAlbum }" /><br /> -->
+			<select id="mediumAlbum" name="mediumAlbum">
+				<option value="-1">No album</option>
+				<% 
+					if(albums != null) {
+						for(Album album : albums) {
+				%>
+					<option value="<%= album.getId() %>"
+					
+						<core:if test="${ name == album.getName() }">
+							<core:out value="selected" />
+						</core:if>
+					
+					><%= album.getName() %></option>
+				<%
+						}
+					}
+				%>
+			</select><br />
 			
 			<label for="mediumFile">Upload:</label>
 			<input type="file" id="mediumFile" name="mediumFile" accept="audio/*, video/*" required /><br />

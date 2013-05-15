@@ -22,19 +22,8 @@
 		<label for="mediumInterpreter">Interpreter:</label>
 		<input readonly="readonly" type="text" id="mediumInterpreter" name="mediumInterpreter" value="${ medium.interpreter }" /><br />
 
-		<!-- <core:choose>
-			<core:when test="${ param.mediumIsInAlbum == 'on' }">
-				<input readonly="readonly" type="checkbox" id="mediumIsInAlbum"
-					name="mediumIsInAlbum" value="checked" checked />
-			</core:when>
-			<core:otherwise>
-				<input readonly="readonly" type="checkbox" id="mediumIsInAlbum"
-					name="mediumIsInAlbum" value="checked" />
-			</core:otherwise>
-		</core:choose>
-		Is in album? <br />
 		<label for="mediumAlbum">Album name:</label>
-		<input readonly="readonly" type="text" id="mediumAlbum" name="mediumAlbum" value="${ param.mediumAlbum }" /><br />-->
+		<input readonly="readonly" type="text" id="mediumAlbum" name="mediumAlbum" value="${ medium.album.name }" /><br />
 
 		<button type="submit" name="mediumEdit" id="mediumEdit">Edit</button>
 		<button type="submit" name="mediumConfirm" id="mediunComfirm">Confirm</button>

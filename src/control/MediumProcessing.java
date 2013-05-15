@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Album;
 import model.MediaType;
 import model.Medium;
 
@@ -73,8 +74,17 @@ public class MediumProcessing extends HttpServlet {
 								medium.setInterpreter(writeStreamToString(stream));
 								break;
 								
-							// TODO Add the function of Medium is in Album.
-							
+							case "mediumAlbum":
+								
+								int id = Integer.parseInt(writeStreamToString(stream));
+								
+								if(id != -1) {
+									
+									Album album = (Album)sqlController.getObjectById("model.Album", id);
+									album.addMediumToAlbum(medium);
+									sqlController.saveObject(album);
+								}
+								
 							case "mediumSubmit":
 								
 								redirect = "/medium_confirmation.jsp";

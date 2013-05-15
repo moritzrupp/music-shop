@@ -26,23 +26,21 @@ public class SQLController {
 	 * @param obj The object to save.
 	 * @return Returns the id of the saved object.
 	 */
-	public int saveObject(Object obj) {
+	public void saveObject(Object obj) {
 		
-		int id;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		id = (Integer)session.save(obj);
+		session.saveOrUpdate(obj);
 		session.getTransaction().commit();
-		
-		return id;
 	}
+	
 	
 	/**
 	 * Reads an object from the database.
 	 * 
 	 * @param className The name of the class of the object.
 	 * @param id The id of the object.
-	 * @return The object or <tt>nnull</tt> if the object does not exist.
+	 * @return The object or <tt>null</tt> if the object does not exist.
 	 * @throws ServletException 
  
 	 */
