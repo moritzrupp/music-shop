@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>Create New Type</h1>
+	
 	<form action="TypeProcessing" method="post" enctype="multipart/form-data">
 		<p>Type in the data for the type:</p>
 		
