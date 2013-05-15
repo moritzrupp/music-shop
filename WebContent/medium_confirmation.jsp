@@ -9,12 +9,12 @@
 <title>Confirm New Medium</title>
 </head>
 <body>
-	<form action="MediumProcessing" action="post">
+	<form action="MediumProcessing" method="post">
 		<h1>Confirm the New Medium</h1>
 		<p>You have entered the following medium data:</p>
 
 		<label for="mediumType">Medium type:</label>
-		<input readonly="readonly" type="text" id="mediumType" name="mediumType" value="${ medium.mediaType }" /><br />
+		<input readonly="readonly" type="text" id="mediumType" name="mediumType" value="${ medium.mediaType.name }" /><br />
 		
 		<label for="mediumTitle">Title:</label>
 		<input readonly="readonly" type="text" id="mediumTitle" name="mediumTitle" value="${ medium.title }" /><br />
@@ -37,7 +37,7 @@
 		<input readonly="readonly" type="text" id="mediumAlbum" name="mediumAlbum" value="${ param.mediumAlbum }" /><br />-->
 
 		<button type="submit" name="mediumEdit" id="mediumEdit">Edit</button>
-		<button type="submit" name="mediumComfirm" id="mediumComfirm">Confirm</button>
+		<button type="submit" name="mediumConfirm" id="mediunComfirm">Confirm</button>
 	</form>
 </body>
 </html>

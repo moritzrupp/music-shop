@@ -4,6 +4,8 @@ import hibernate.HibernateUtil;
 
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import model.Album;
 import model.MediaType;
 import model.Medium;
@@ -41,23 +43,25 @@ public class SQLController {
 	 * @param className The name of the class of the object.
 	 * @param id The id of the object.
 	 * @return The object or <tt>nnull</tt> if the object does not exist.
+	 * @throws ServletException 
  
 	 */
-	public Object getObjectById(String className, int id) {
+	public Object getObjectById(String className, int id) throws ServletException {
 		
 		Object result = null;
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		try {
-			result = session.get(Class.forName(className).getClass(), id);
+
+			result = session.get(Class.forName(className), id);
 			session.getTransaction().commit();
+			return result;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			
 			session.getTransaction().rollback();
-			e.printStackTrace();
+			throw new ServletException(e);
 		}
-		return result;
 	}
 	
 	/**
