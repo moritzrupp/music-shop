@@ -32,6 +32,15 @@
   	<url-pattern>/MediumProcessing</url-pattern> 
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>TypeProcessing</servlet-name>
+  	<servlet-class>control.TypeProcessing</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TypeProcessing</servlet-name>
+  	<url-pattern>/TypeProcessing</url-pattern> 
+  </servlet-mapping>
+  
   <error-page>
     <error-code>500</error-code>
     <location>/error500.jsp</location>

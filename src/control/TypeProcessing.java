@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Album;
+import model.MediaType;
 
 import org.apache.tomcat.util.http.fileupload.FileItemFactory;
 import org.apache.tomcat.util.http.fileupload.FileItemIterator;
@@ -27,16 +27,16 @@ import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.hibernate.exception.ConstraintViolationException;
 
-public class AlbumProcessing extends HttpServlet {
+public class TypeProcessing extends HttpServlet {
 
-	private static final long serialVersionUID = -7500612105411929017L;
+	private static final long serialVersionUID = 6519831100563714682L;
 	private SQLController sqlController = new SQLController();
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String redirect = "";
-		Album album = new Album();
+		MediaType type= new MediaType();
 		boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		
 		if(isMultipart) {
@@ -61,23 +61,19 @@ public class AlbumProcessing extends HttpServlet {
 						
 						switch(fieldName) {
 						
-							case "albumName":
+							case "typeName":
 								
-								album.setName(writeStreamToString(stream));
+								type.setName(writeStreamToString(stream));
 								break;
-							case "albumInterpreter":
+							case "typeSubmit":
 								
-								album.setInterpreter(writeStreamToString(stream));
-								break;
-							case "albumSubmit":
-								
-								redirect = "/album_confirmation.jsp";
+								redirect = "/type_confirmation.jsp";
 								break;
 						}
 					}
 					else {
 												
-						File path = new File(getServletContext().getRealPath("/") + "tmp/media/" + album.getInterpreter() + album.getName());
+						File path = new File(getServletContext().getRealPath("/") + "tmp/icons/");
 												
 						if (!path.exists()) {
 							
@@ -94,7 +90,7 @@ public class AlbumProcessing extends HttpServlet {
 							suffix = "";
 						}
 						
-						uploadedFile = new File(path + "/" + album.getName() + suffix);
+						uploadedFile = new File(path + "/" + type.getName() + suffix);
 												
 						try {
 							
@@ -104,16 +100,16 @@ public class AlbumProcessing extends HttpServlet {
 							os.flush();
 							os.close();
 							
-							album.setCoverPicture("storage/media/" + album.getInterpreter() + "/" + album.getName() + "/" + album.getName() + suffix);
-							request.getSession().setAttribute("cover", "tmp/media/" + album.getInterpreter() + "/" + album.getName() + "/" + album.getName() + suffix);
+							type.setIcon("storage/icons/" + type.getName().toLowerCase() + suffix);
+							request.getSession().setAttribute("icon", "tmp/icons/" + type.getName().toLowerCase() + suffix);
 						} catch(IOException ioe) {
 							
-							throw new ServletException("Error while writing the uploaded file to disk. Please contact and administrator.");
+							throw new ServletException("Error while writing the uploaded file to disk. Please contact and administrator.",ioe);
 						}
 					}
 				}
 				
-				request.getSession().setAttribute("album", album);
+				request.getSession().setAttribute("type", type);
 			} catch (FileUploadException e) {
 				
 				throw new ServletException("Error while uploading the cover picture. Please try again or contact an administrator.");
@@ -121,21 +117,21 @@ public class AlbumProcessing extends HttpServlet {
 		}
 		else {
 			
-			if(request.getParameter("albumEdit") != null) {
+			if(request.getParameter("typeEdit") != null) {
 				
-				redirect = "/new_album.jsp";
+				redirect = "/new_type.jsp";
 				
-				deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
+				deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("icon"));
 			}
-			else if(request.getParameter("albumConfirm") != null) {
+			else if(request.getParameter("typeConfirm") != null) {
 				
 				try {
 					
-					redirect = "/album_processing.jsp";
-					sqlController.saveObject(request.getSession().getAttribute("album"));
+					redirect = "/type_processing.jsp";
+					sqlController.saveObject(request.getSession().getAttribute("type"));
 					
-					File tmpFile = new File(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
-					File storaFile = new File(getServletContext().getRealPath("/") + ((Album)request.getSession().getAttribute("album")).getCoverPicture());
+					File tmpFile = new File(getServletContext().getRealPath("/") + request.getSession().getAttribute("icon"));
+					File storaFile = new File(getServletContext().getRealPath("/") + ((MediaType)request.getSession().getAttribute("type")).getIcon());
 					
 					if(!storaFile.exists()) {
 						
@@ -143,16 +139,16 @@ public class AlbumProcessing extends HttpServlet {
 					}
 					
 					Files.copy(tmpFile.toPath(), storaFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
+					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("icon"));
 				}
 				catch(ConstraintViolationException cve) {
 					
-					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
+					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("icon"));
 					throw new ServletException(cve);
 				}
 				catch(NoSuchFileException nsfe) {
 					
-					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
+					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("icon"));
 					throw new ServletException(nsfe);
 				}
 			}
@@ -174,7 +170,7 @@ public class AlbumProcessing extends HttpServlet {
 				
 				if(!success) {
 												
-					throw new IOException("The album cover could not be deleted.");
+					throw new IOException("The type icon could not be deleted.");
 				}
 				else {
 					

@@ -92,8 +92,15 @@ public class MediumProcessing extends HttpServlet {
 						}
 					}
 					else {
-												
-						File path = new File(getServletContext().getRealPath("/") + "storage/media/" + medium.getInterpreter());
+						
+						String album = "";
+						
+						if(medium.getAlbum() != null) {
+							
+							album = medium.getAlbum().getName();
+						}
+						
+						File path = new File(getServletContext().getRealPath("/") + "storage/media/" + medium.getInterpreter() + album);
 												
 						if (!path.exists()) {
 							
@@ -127,7 +134,7 @@ public class MediumProcessing extends HttpServlet {
 						
 						medium.setDuration("00:00");
 						medium.setFileSize(uploadedFile.length());
-						medium.setFileLocation("storage/media/" + medium.getInterpreter() + "/" + medium.getTitle() + suffix);
+						medium.setFileLocation("storage/media/" + album + medium.getInterpreter() + "/" + medium.getTitle() + suffix);
 					}
 				}
 				

@@ -4,21 +4,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>New Type</title>
+<title>Create New Type</title>
 </head>
 <body>
-<h1>New Type</h1>
-<p>
-Type in the textbox the new type you want to create and click on submit.
-</p>
-<form action="JSPController">
-<label for="newType">New type: </label>
-<input type="text" id="newType" name="newType" value="${ param.newType }"><br>
-<label for="icon">Icon: </label>
-<input type="file" id="coverPicture" name="coverPicture" accept="image/*" /> <br />
-
-<button type="reset" name="typeCancel" id="typeCancel">Reset</button>
-<button type="submit" name="typeConfirm" id="typeConfirm" >Submit</button>
-</form>
+	<h1>Create New Type</h1>
+	<form action="TypeProcessing" method="post" enctype="multipart/form-data">
+		<p>Type in the data for the type:</p>
+		
+		<label for="typeName">Name:</label>
+		<input type="text" id="typeName" name="typeName" value="${ type.name }" /><br />
+		
+		<label for="typeIcon">Icon: </label>
+		<input type="file" id="typeIcon" name="typeIcon" accept="image/*" /><br />
+		
+		<button type="reset" name="typeCancel" id="typeCancel">Reset</button>
+		<button type="submit" name="typeSubmit" id="typeSubmit" >Next</button>
+	</form>
 </body>
 </html>
