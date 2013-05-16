@@ -9,6 +9,12 @@
 <title>All Media</title>
 </head>
 <body>
+<form action="AllMediaProcessing" method="post">
+	<button type="submit" name="shoppingBasket" id="shoppingBasket" value="shoppingBasket">Shopping Basket</button>
+	<button type="submit" name="newType" id="newType" value="newType">New Type</button>
+	<button type="submit" name="newMedium" id="newMedium" value="newMedium">New Medium</button>
+	<button type="submit" name="newAlbum" id="newAlbum" value="newAlbum">New Album</button>
+</form>
 <h1>All Media</h1>
         <table>
             <c:forEach var="medium" items="${media}">
@@ -20,7 +26,7 @@
 	                    <c:out value="${medium.interpreter}"/>
 	                </td>                
 	                <td>
-						<form>
+						<form method="post"  action="AllMediaProcessing">
 						<input type="hidden" name="id" value="${medium.id}">
 						<button type="submit" name="buy" id="buy" value="buy">Buy</button>
 

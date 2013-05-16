@@ -5,11 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Show Error Page</title>
+<title>Error Page</title>
 </head>
 <body>
 <h1>Opps...</h1>
-<table width="100%" border="1">
+<table border="1">
 <tr valign="top">
 <td width="40%"><b>Error:</b></td>
 <td>${pageContext.exception}</td>
