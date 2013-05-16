@@ -15,6 +15,15 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>AllMediaProcessing</servlet-name>
+  	<servlet-class>control.AllMediaProcessing</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AllMediaProcessing</servlet-name>
+  	<url-pattern>/AllMediaProcessing</url-pattern> 
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>MediumProcessing</servlet-name>
   	<servlet-class>control.MediumProcessing</servlet-class>
   </servlet>
@@ -35,5 +44,5 @@
   <error-page>
     <error-code>500</error-code>
     <location>/error500.jsp</location>
-</error-page>
+	</error-page>
 </web-app>

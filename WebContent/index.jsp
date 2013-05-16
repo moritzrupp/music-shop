@@ -8,9 +8,10 @@
 </head>
 <body>
 <ul>
-<li><a href="new_album.jsp">New Album</a></li>
-<li><a href="new_medium.jsp">New Medium</a></li>
-<li><a href="new_type.jsp">New Media Type</a></li>
+	<li><a href="new_album.jsp">New Album</a></li>
+	<li><a href="new_medium.jsp">New Medium</a></li>
+	<li><a href="new_type.jsp">New Media Type</a></li> 
+	<li><a href="AllMediaProcessing?showAll=1">Show All Media</a></li> 
 </ul>
 </body>
 </html>
