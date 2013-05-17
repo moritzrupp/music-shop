@@ -44,6 +44,9 @@
 		</td>
 	</tr>
 </table>
+<form action="AllMediaProcessing">
+<button type="submit" name="back" id="back">Back</button>
+</form>
 <form method="post"  action="AllMediaProcessing">
 <input type="hidden" name="id" value="${medium.id}">
 <button type="submit" name="buy" id="buy" value="buy">Buy</button>

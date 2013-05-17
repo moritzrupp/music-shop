@@ -12,6 +12,7 @@
 	<li><a href="new_medium.jsp">New Medium</a></li>
 	<li><a href="new_type.jsp">New Media Type</a></li> 
 	<li><a href="AllMediaProcessing">Show All Media</a></li> 
+	<li><a href="AllAlbumsProcessing">Show All Albums</a></li> 
 </ul>
 </body>
 </html>
