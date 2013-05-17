@@ -22,7 +22,6 @@ public class AllMediaProcessing extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("blub");
 		String redirect = "/allMedia.jsp";
 		
 		request.setAttribute("media", sqlController.getAllMedia());
@@ -36,7 +35,7 @@ public class AllMediaProcessing extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String redirect = "new_type.jsp";
+		String redirect = "";
 		
 		if (req.getParameter("details")!= null){
 			redirect = "mediumDetails.jsp";
@@ -62,7 +61,6 @@ public class AllMediaProcessing extends HttpServlet {
 		else if (req.getParameter("shoppingBasket")!= null){
 			//TODO open shopping basket
 		}
-		System.out.println(redirect);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
 		dispatcher.forward(req, resp);       
