@@ -21,6 +21,15 @@
   <servlet-mapping>
   	<servlet-name>AllMediaProcessing</servlet-name>
   	<url-pattern>/AllMediaProcessing</url-pattern> 
+  </servlet-mapping>  
+  
+  <servlet>
+  	<servlet-name>AllAlbumsProcessing</servlet-name>
+  	<servlet-class>control.AllAlbumsProcessing</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AllAlbumsProcessing</servlet-name>
+  	<url-pattern>/AllAlbumsProcessing</url-pattern> 
   </servlet-mapping>
   
   <servlet>

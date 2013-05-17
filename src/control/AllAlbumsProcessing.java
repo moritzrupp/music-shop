@@ -15,17 +15,17 @@ import org.apache.tomcat.util.http.fileupload.FileItemStream;
 import model.Medium;
 
 
-public class AllMediaProcessing extends HttpServlet {
+public class AllAlbumsProcessing extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private SQLController sqlController = new SQLController();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String redirect = "/allMedia.jsp";
+		String redirect = "/allAlbums.jsp";
 		
-		request.setAttribute("media", sqlController.getAllMedia());
-		redirect = "/allMedia.jsp";
+		request.setAttribute("albums", sqlController.getAllAlbums());
+		redirect = "/allAlbums.jsp";
 
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
@@ -38,16 +38,16 @@ public class AllMediaProcessing extends HttpServlet {
 		String redirect = "";
 		
 		if (req.getParameter("details")!= null){
-			redirect = "mediumDetails.jsp";
+			redirect = "albumDetails.jsp";
 			
 	        Integer id = new Integer(req.getParameter("id"));	 
-	        req.setAttribute("medium", sqlController.getObjectById("model.Medium", id));
+	        req.setAttribute("album", sqlController.getObjectById("model.Album", id));
 		}
 		else if (req.getParameter("buy")!= null){
-			//TODO buy the medium
+			//TODO buy the album
 		}
 		else if (req.getParameter("play")!= null){
-			//TODO play the medium
+			//TODO play the album
 		}
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";
