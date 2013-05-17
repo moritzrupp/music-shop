@@ -77,8 +77,8 @@ public class AlbumProcessing extends HttpServlet {
 					}
 					else {
 												
-						File path = new File(getServletContext().getRealPath("/") + "tmp/media/" + album.getInterpreter() + album.getName());
-												
+						File path = new File(getServletContext().getRealPath("/") + "tmp/media/" + album.getInterpreter() + "/" + album.getName());
+						
 						if (!path.exists()) {
 							
 							path.mkdirs();
@@ -95,7 +95,7 @@ public class AlbumProcessing extends HttpServlet {
 						}
 						
 						uploadedFile = new File(path + "/" + album.getName() + suffix);
-												
+						
 						try {
 							
 							OutputStream os = new FileOutputStream(uploadedFile);
@@ -195,12 +195,13 @@ public class AlbumProcessing extends HttpServlet {
 					
 					File dir = new File(path);
 
-					if (dir.isDirectory()) {
+					if(dir.isDirectory()) {
 						
 						String[] files = dir.list();
 						
-						if (files.length == 0) {
-					        
+						if(files.length == 0) {
+
+							deleteFile(dir.toString());
 							dir.delete();
 						}
 					}

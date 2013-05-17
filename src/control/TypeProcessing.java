@@ -90,7 +90,7 @@ public class TypeProcessing extends HttpServlet {
 							suffix = "";
 						}
 						
-						uploadedFile = new File(path + "/" + type.getName() + suffix);
+						uploadedFile = new File(path + "/" + type.getName().toLowerCase() + suffix);
 												
 						try {
 							
@@ -104,7 +104,7 @@ public class TypeProcessing extends HttpServlet {
 							request.getSession().setAttribute("icon", "tmp/icons/" + type.getName().toLowerCase() + suffix);
 						} catch(IOException ioe) {
 							
-							throw new ServletException("Error while writing the uploaded file to disk. Please contact and administrator.",ioe);
+							throw new ServletException("Error while writing the uploaded file to disk. Please contact and administrator.", ioe);
 						}
 					}
 				}
@@ -170,7 +170,7 @@ public class TypeProcessing extends HttpServlet {
 				
 				if(!success) {
 												
-					throw new IOException("The type icon could not be deleted.");
+					throw new IOException("The album cover could not be deleted.");
 				}
 				else {
 					
@@ -190,13 +190,15 @@ public class TypeProcessing extends HttpServlet {
 					path += dirSplit[dirSplit.length-1];
 					
 					File dir = new File(path);
+					System.out.println("Debug (dir to delete): " + dir);
 
-					if (dir.isDirectory()) {
+					if(dir.isDirectory()) {
 						
 						String[] files = dir.list();
 						
-						if (files.length == 0) {
-					        
+						if(files.length == 0) {
+					        System.out.println("Debug: Dir is empty.");
+					        deleteFile(dir.toString());
 							dir.delete();
 						}
 					}

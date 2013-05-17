@@ -16,7 +16,7 @@
 		<label for="typeIcon">Icon: </label>
 		<img border="0" src="${ icon }" alt="Type icon" width="25" height="25" /><br />
 		
-		<button type="submit" name="typeBack" id="typeBack">Back</button>
+		<button type="submit" name="typeEdit" id="typeBack">Edit</button>
 		<button type="submit" name="typeConfirm" id="typeConfirm">Confirm</button>
 	</form>
 </body>

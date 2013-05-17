@@ -67,7 +67,7 @@
 			<label for="mediumFile">Upload:</label>
 			<input type="file" id="mediumFile" name="mediumFile" accept="audio/*, video/*" required /><br />
 			
-			<button type="reset" name="mediumCancel" id="mediumCancel" value="Cancel">Cancel</button>
+			<button type="reset" name="mediumReset" id="mediumReset" value="Reset">Reset</button>
 			<button type="submit" name="mediumSubmit" id="mediumSubmit" value="Submit">Next</button>
 		</form>
 	<%

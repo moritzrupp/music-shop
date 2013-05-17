@@ -100,7 +100,7 @@ public class MediumProcessing extends HttpServlet {
 							album = medium.getAlbum().getName();
 						}
 						
-						File path = new File(getServletContext().getRealPath("/") + "storage/media/" + medium.getInterpreter() + album);
+						File path = new File(getServletContext().getRealPath("/") + "storage/media/" + medium.getInterpreter() + "/" + album);
 												
 						if (!path.exists()) {
 							
@@ -134,7 +134,7 @@ public class MediumProcessing extends HttpServlet {
 						
 						medium.setDuration("00:00");
 						medium.setFileSize(uploadedFile.length());
-						medium.setFileLocation("storage/media/" + album + medium.getInterpreter() + "/" + medium.getTitle() + suffix);
+						medium.setFileLocation("storage/media/" + medium.getInterpreter() + "/" + album + "/" + medium.getTitle() + suffix);
 					}
 				}
 				
@@ -149,6 +149,7 @@ public class MediumProcessing extends HttpServlet {
 			if(request.getParameter("mediumEdit") != null) {
 				
 				redirect = "/new_medium.jsp";
+				deleteFile(getServletContext().getRealPath("/") + ((Medium)request.getSession().getAttribute("medium")).getFileLocation());
 			}
 			else if(request.getParameter("mediumConfirm") != null) {
 				
@@ -177,6 +178,54 @@ public class MediumProcessing extends HttpServlet {
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
 		dispatcher.forward(request, response);
+	}
+	
+	private void deleteFile(String filePath) throws IOException {
+		
+		File delFile = new File(filePath);
+		
+		if(delFile.exists()) {
+			
+			if(delFile.canWrite()) {
+				
+				boolean success = delFile.delete();
+				
+				if(!success) {
+												
+					throw new IOException("The album cover could not be deleted.");
+				}
+				else {
+					
+					String[] split = (delFile.toString()).split("/");
+					String[] dirSplit = new String[split.length-1];
+					String path = "";
+					
+					for(int i = 0; i < dirSplit.length; i++) {
+						
+						dirSplit[i] = split[i];
+					}
+					
+					for(int i = 0; i < dirSplit.length-1; i++) {
+						
+						path += dirSplit[i] + "/";
+					}
+					path += dirSplit[dirSplit.length-1];
+					
+					File dir = new File(path);
+
+					if(dir.isDirectory()) {
+						
+						String[] files = dir.list();
+						
+						if(files.length == 0) {
+
+							deleteFile(dir.toString());
+							dir.delete();
+						}
+					}
+				}
+			}
+		}
 	}
 	
 	private String writeStreamToString(InputStream is) {

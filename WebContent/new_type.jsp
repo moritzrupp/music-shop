@@ -13,10 +13,10 @@
 		<p>Type in the data for the type:</p>
 		
 		<label for="typeName">Name:</label>
-		<input type="text" id="typeName" name="typeName" value="${ type.name }" /><br />
+		<input type="text" id="typeName" name="typeName" value="${ type.name }" required /><br />
 		
 		<label for="typeIcon">Icon: </label>
-		<input type="file" id="typeIcon" name="typeIcon" accept="image/*" /><br />
+		<input type="file" id="typeIcon" name="typeIcon" accept="image/*" required /><br />
 		
 		<button type="reset" name="typeCancel" id="typeCancel">Reset</button>
 		<button type="submit" name="typeSubmit" id="typeSubmit" >Next</button>
