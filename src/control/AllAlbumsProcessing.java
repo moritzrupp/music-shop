@@ -41,7 +41,7 @@ public class AllAlbumsProcessing extends HttpServlet {
 			redirect = "albumDetails.jsp";
 			
 	        Integer id = new Integer(req.getParameter("id"));	 
-	        req.setAttribute("album", sqlController.getAlbum(id));
+	        req.setAttribute("album", sqlController.getObjectById("model.Album", id));
 		}
 		else if (req.getParameter("buy")!= null){
 			//TODO buy the album

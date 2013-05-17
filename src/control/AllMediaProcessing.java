@@ -41,7 +41,7 @@ public class AllMediaProcessing extends HttpServlet {
 			redirect = "mediumDetails.jsp";
 			
 	        Integer id = new Integer(req.getParameter("id"));	 
-	        req.setAttribute("medium", sqlController.getMedium(id));
+	        req.setAttribute("medium", sqlController.getObjectById("model.Medium", id));
 		}
 		else if (req.getParameter("buy")!= null){
 			//TODO buy the medium
