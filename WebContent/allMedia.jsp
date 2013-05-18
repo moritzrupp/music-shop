@@ -9,14 +9,23 @@
 <title>All Media</title>
 </head>
 <body>
-<form action="AllMediaProcessing" method="post">
+<form action="AllMediaProcessing" method="post" style="float:left;">
 	<button type="submit" name="shoppingBasket" id="shoppingBasket" value="shoppingBasket">Shopping Basket</button>
 	<button type="submit" name="newType" id="newType" value="newType">New Type</button>
-	<button type="submit" name="newMedium" id="newMedium" value="newMedium">New Medium</button>
 	<button type="submit" name="newAlbum" id="newAlbum" value="newAlbum">New Album</button>
+</form>
+<form action="MediumProcessing" method="get">
+	<button type="submit" name="newMedium" id="newMedium" value="newMedium">New Medium</button>
 </form>
 <h1>All Media</h1>
         <table>
+            <thead>
+            	<tr>
+            		<td>Title</td>
+            		<td>Interpreter</td>
+            	</tr>
+            </thead>
+            <tbody>
             <c:forEach var="medium" items="${media}">
                 <tr>
                     <td>
@@ -37,6 +46,7 @@
 	                </td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
 </body>
 </html>

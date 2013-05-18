@@ -48,10 +48,10 @@
       </c:forEach>
 </table>
 
-<form action="AllMediaProcessing">
+<form action="AllAlbumsProcessing">
 <button type="submit" name="back" id="back">Back</button>
 </form>
-<form method="post"  action="AllMediaProcessing">
+<form method="post"  action="AllAlbumsProcessing">
 <input type="hidden" name="id" value="${medium.id}">
 <button type="submit" name="buy" id="buy" value="buy">Buy</button>
 <button type="submit" name="play" id="play" value="play">Play</button>

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.NoSuchFileException;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.servlet.RequestDispatcher;
@@ -31,6 +32,22 @@ public class MediumProcessing extends HttpServlet {
 
 	private static final long serialVersionUID = 7175206028243948534L;
 	private SQLController sqlController = new SQLController();
+
+	
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String redirect = "new_medium.jsp";
+		
+		List<MediaType> types = sqlController.getAllMediaTypes();
+		List<Album> albums = sqlController.getAllAlbums();
+		req.getSession().setAttribute("types", types);
+		req.getSession().setAttribute("albums", albums);
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
+		dispatcher.forward(req, resp);
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

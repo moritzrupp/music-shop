@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="js/scripts.js"></script>
 <title>Create New Album</title>
 </head>
 <body>
@@ -20,7 +21,7 @@
 		<label for="albumCover">Cover picture: </label> 
 		<input type="file" id="albumCover" name="albumCover" accept="image/*" value="${ param.albumCover }" required /><br />
 
-		<button type="reset" name="albumCancel" id="albumCancel">Cancel</button>
+		<button type="reset" name="albumCancel" id="albumCancel" onclick="resetForm(this.form)">Cancel</button>
 		<button type="submit" name="albumSubmit" id="albumSubmit">Next</button>
 	</form>
 </body>

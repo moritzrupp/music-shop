@@ -9,13 +9,15 @@
 <title>All Albums</title>
 </head>
 <body>
-<form action="AllAlbumsProcessing" method="post">
+<form action="AllAlbumsProcessing" method="post" style="float:left;">
 	<button type="submit" name="shoppingBasket" id="shoppingBasket" value="shoppingBasket">Shopping Basket</button>
 	<button type="submit" name="newType" id="newType" value="newType">New Type</button>
-	<button type="submit" name="newMedium" id="newMedium" value="newMedium">New Medium</button>
 	<button type="submit" name="newAlbum" id="newAlbum" value="newAlbum">New Album</button>
 </form>
-<h1>All Media</h1>
+<form action="MediumProcessing" method="get">
+	<button type="submit" name="newMedium" id="newMedium" value="newMedium">New Medium</button>
+</form>
+<h1>All Albums</h1>
         <table>
             <c:forEach var="album" items="${albums}">
                 <tr>

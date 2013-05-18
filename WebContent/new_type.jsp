@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="js/scripts.js"></script>
 <title>Create New Type</title>
 </head>
 <body>
@@ -18,8 +19,8 @@
 		<label for="typeIcon">Icon: </label>
 		<input type="file" id="typeIcon" name="typeIcon" accept="image/*" required /><br />
 		
-		<button type="reset" name="typeCancel" id="typeCancel">Reset</button>
-		<button type="submit" name="typeSubmit" id="typeSubmit" >Next</button>
+		<button type="reset" name="typeCancel" id="typeCancel" onclick="resetForm(this.form)">Cancel</button>
+		<button type="submit" name="typeSubmit" id="typeSubmit">Next</button>
 	</form>
 </body>
 </html>
