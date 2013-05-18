@@ -21,13 +21,18 @@
         <table>
             <thead>
             	<tr>
+            		<td>&nbsp;</td>
             		<td>Title</td>
             		<td>Interpreter</td>
+            		<td>&nbsp;</td>
             	</tr>
             </thead>
             <tbody>
             <c:forEach var="medium" items="${media}">
                 <tr>
+                	<td>
+                		<img src="${ medium.mediaType.icon }" width="25" height="25" alt="Medium icon" border="0" />
+                	</td>
                     <td>
                         <c:out value="${medium.title}"/>
                     </td>
