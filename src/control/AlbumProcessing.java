@@ -178,7 +178,18 @@ public class AlbumProcessing extends HttpServlet {
 				}
 				else {
 					
-					String[] split = (delFile.toString()).split("/");
+					final String os = System.getProperty("os.name").toLowerCase();
+					String[] split;
+					
+					if(os.startsWith("win")) {
+						
+						split = (delFile.toString()).split("\\");
+					}
+					else {
+						
+						split = (delFile.toString()).split("/");
+					}
+					
 					String[] dirSplit = new String[split.length-1];
 					String path = "";
 					System.out.println("DEBUG (dirSplit.length): " + dirSplit.length);

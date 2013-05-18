@@ -178,10 +178,21 @@ public class TypeProcessing extends HttpServlet {
 				}
 				else {
 					
-					String[] split = (delFile.toString()).split("/");
+					final String os = System.getProperty("os.name").toLowerCase();
+					String[] split;
+					
+					if(os.startsWith("win")) {
+						
+						split = (delFile.toString()).split("\\");
+					}
+					else {
+						
+						split = (delFile.toString()).split("/");
+					}
+					
 					String[] dirSplit = new String[split.length-1];
 					String path = "";
-					
+					System.out.println("DEBUG (dirSplit.length): " + dirSplit.length);
 					for(int i = 0; i < dirSplit.length; i++) {
 						
 						dirSplit[i] = split[i];
@@ -192,17 +203,17 @@ public class TypeProcessing extends HttpServlet {
 						path += dirSplit[i] + "/";
 					}
 					path += dirSplit[dirSplit.length-1];
+					System.out.println("DEBUG (path): " + path);
 					
 					File dir = new File(path);
-					System.out.println("Debug (dir to delete): " + dir);
 
 					if(dir.isDirectory()) {
 						
 						String[] files = dir.list();
 						
 						if(files.length == 0) {
-					        System.out.println("Debug: Dir is empty.");
-					        deleteFile(dir.toString());
+
+							deleteFile(dir.toString());
 							dir.delete();
 						}
 					}
