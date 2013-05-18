@@ -75,7 +75,7 @@ public class Database {
 		Album a2 = new Album("Album 2", "Interpret 2", "storage/files/abc.png",
 				null);
 
-		MediaType mp3 = new MediaType("MP3", "storage/images/mp3.png");
+		MediaType mp3 = new MediaType("MP3", "storage/images/mp3.png", 1);
 
 		try {
 

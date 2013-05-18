@@ -16,6 +16,12 @@
 		<label for="typeName">Name:</label>
 		<input type="text" id="typeName" name="typeName" value="${ type.name }" required /><br />
 		
+		<label for="typeType">Type:</label>
+		<select name="typeType" id="typeType">
+			<option value="1">Audio</option>
+			<option value="0">Video</option>
+		</select><br />
+		
 		<label for="typeIcon">Icon: </label>
 		<input type="file" id="typeIcon" name="typeIcon" accept="image/*" required /><br />
 		

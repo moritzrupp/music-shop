@@ -15,6 +15,7 @@ public class MediaType {
 	private int mId;
 	private String mName;
 	private String mIcon;
+	private int mAudio;
 	
 	public MediaType() {
 		super();
@@ -24,10 +25,11 @@ public class MediaType {
 	 * @param mName The name of the media type.
 	 * @param mIcon The path to the icon of the media type.
 	 */
-	public MediaType(String mName, String mIcon) {
+	public MediaType(String mName, String mIcon, int mAudio) {
 		super();
 		this.mName = mName;
 		this.mIcon = mIcon;
+		this.mAudio = mAudio;
 	}
 	
 	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
@@ -61,6 +63,14 @@ public class MediaType {
 	}
 	public void setName(String mName) {
 		this.mName = mName;
+	}
+	
+	@Column(name="AUDIO", nullable = false)
+	public int getAudio() {
+		return mAudio;
+	}
+	public void setAudio(int mAudio) {
+		this.mAudio = mAudio;
 	}
 
 	/* (non-Javadoc)

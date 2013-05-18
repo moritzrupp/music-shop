@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Medium;
+
 
 public class AllMediaProcessing extends HttpServlet {
 
@@ -41,7 +43,14 @@ public class AllMediaProcessing extends HttpServlet {
 			//TODO buy the medium
 		}
 		else if (req.getParameter("play")!= null){
-			//TODO play the medium
+			
+			redirect = "player.jsp";
+			
+			Medium m = (Medium)sqlController.getObjectById("model.Medium", Integer.parseInt(req.getParameter("id")));
+	        req.setAttribute("medium", m);
+	        
+	        m.setListened(m.getListened()+1);
+	        sqlController.saveObject(m);
 		}
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";

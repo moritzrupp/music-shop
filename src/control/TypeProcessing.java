@@ -65,6 +65,10 @@ public class TypeProcessing extends HttpServlet {
 								
 								type.setName(writeStreamToString(stream));
 								break;
+							case "typeType":
+								
+								type.setAudio(Integer.parseInt(writeStreamToString(stream)));
+								break;
 							case "typeSubmit":
 								
 								redirect = "/type_confirmation.jsp";
