@@ -50,6 +50,15 @@
   	<url-pattern>/TypeProcessing</url-pattern> 
   </servlet-mapping>
   
+   <servlet>
+  	<servlet-name>ShowStatistic</servlet-name>
+  	<servlet-class>control.ShowStatistic</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ShowStatistic</servlet-name>
+  	<url-pattern>/ShowStatistic</url-pattern> 
+  </servlet-mapping>
+  
   <error-page>
     <error-code>500</error-code>
     <location>/error500.jsp</location>

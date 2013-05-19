@@ -14,8 +14,11 @@
 	<button type="submit" name="newType" id="newType" value="newType">New Type</button>
 	<button type="submit" name="newAlbum" id="newAlbum" value="newAlbum">New Album</button>
 </form>
-<form action="MediumProcessing" method="get">
+<form action="MediumProcessing" method="get" style="float:left;">
 	<button type="submit" name="newMedium" id="newMedium" value="newMedium">New Medium</button>
+</form>
+<form action="ShowStatistic" method="get">
+	<button type="submit" name="showStatistic" id="showStatistic">Show Statistic</button>
 </form>
 <h1>All Media</h1>
         <table>
