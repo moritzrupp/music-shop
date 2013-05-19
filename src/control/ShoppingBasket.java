@@ -1,8 +1,6 @@
 package control;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,23 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import model.Medium;
 
 
-public class AllMediaProcessing extends HttpServlet {
+public class ShoppingBasket extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private SQLController sqlController = new SQLController();
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String redirect = "/allMedia.jsp";
-		
-		request.setAttribute("media", sqlController.getAllMedia());
-		redirect = "/allMedia.jsp";
-
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
-		dispatcher.forward(request, response);
-	}
-
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -43,13 +30,14 @@ public class AllMediaProcessing extends HttpServlet {
 	        Integer id = new Integer(req.getParameter("id"));	 
 	        req.setAttribute("medium", sqlController.getObjectById("model.Medium", id));
 		}
-		else if (req.getParameter("buy")!= null){
-			if (req.getSession().getAttribute("shoppingBasket") == null)
-				req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
-			@SuppressWarnings("unchecked")
-			Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
-			set.add((Medium)sqlController.getObjectById("model.Medium", new Integer(req.getParameter("id"))));
-			req.getSession().setAttribute("shoppingBasket", set);
+		else if (req.getParameter("delete")!= null){
+			Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("ShoppingBasket");
+			for (Medium med : set) {
+				if (med.getId() == Integer.parseInt(req.getParameter("id"))){
+					set.remove(med);
+				}
+			}
+			redirect = "shoppingBasket.jsp";
 		}
 		else if (req.getParameter("play")!= null){
 			
@@ -61,17 +49,22 @@ public class AllMediaProcessing extends HttpServlet {
 	        m.setListened(m.getListened()+1);
 	        sqlController.saveObject(m);
 		}
-		else if (req.getParameter("newType")!= null){
-			redirect = "new_type.jsp";
+		else if (req.getParameter("clear")!= null){
+			req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
+			redirect = "shoppingBasket.jsp";			
 		}
-		else if (req.getParameter("newMedium")!= null){
-			redirect = "new_medium.jsp";
+		else if (req.getParameter("print")!= null){
+			Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
+			req.getSession().setAttribute("numbers", set.size());
+				
+			for (Medium med : set){
+				med.setSold(med.getSold()+1);
+				sqlController.saveObject(med);
+			}
+			redirect = "print.jsp";
 		}
-		else if (req.getParameter("newAlbum")!= null){
-			redirect = "new_album.jsp";
-		}
-		else if (req.getParameter("shoppingBasket")!= null){
-			//TODO open shopping basket
+		else if (req.getParameter("back")!= null){
+			redirect = "allMedia.jsp";
 		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);

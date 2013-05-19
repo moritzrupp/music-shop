@@ -177,7 +177,7 @@ public class AlbumProcessing extends HttpServlet {
 					throw new IOException("The album cover could not be deleted.");
 				}
 				else {
-					
+					System.out.println(delFile.toString());
 					String[] split = (delFile.toString()).split("/");
 					String[] dirSplit = new String[split.length-1];
 					String path = "";
