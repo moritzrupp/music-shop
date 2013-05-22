@@ -1,6 +1,5 @@
 package model;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +12,10 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+@SuppressWarnings("rawtypes")
 @Entity
 @Table( name = "MEDIA" )
-public class Medium {
+public class Medium implements Comparable{
 	private int mId;
 	private String mTitle;
 	private String mInterpreter;
@@ -29,7 +29,7 @@ public class Medium {
 	private MediaType mMediaType;
 	private Album mAlbum;
 	
-	public Medium() {
+	public Medium(){
 		super();
 	}
 
@@ -166,6 +166,20 @@ public class Medium {
 				+ mFileLocation + ", mListened=" + mListened + ", mSold="
 				+ mSold + ", mMediaType=" + mMediaType + ((mAlbum != null) ? ", mAlbum=" + mAlbum.getName() : "")
 				+ "]";
+	}
+
+	public int compareTo(Medium med) {
+		
+		return this.mId-med.mId;
+	}
+
+	@Override
+	public int compareTo(Object o) throws ClassCastException {
+		 if (!(o instanceof Medium))
+		      throw new ClassCastException("A Medium object expected.");
+		 
+		 int medID = ((Medium) o).getId();  
+		 return this.mId - medID;
 	}
 
 }

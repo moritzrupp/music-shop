@@ -1,8 +1,8 @@
 package control;
 
 import java.io.IOException;
-import java.util.Set;
 import java.util.TreeSet;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,12 +31,12 @@ public class ShoppingBasket extends HttpServlet {
 	        req.setAttribute("medium", sqlController.getObjectById("model.Medium", id));
 		}
 		else if (req.getParameter("delete")!= null){
-			Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("ShoppingBasket");
-			for (Medium med : set) {
-				if (med.getId() == Integer.parseInt(req.getParameter("id"))){
-					set.remove(med);
-				}
-			}
+			Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
+			Medium deleteObject=null;
+			for (Medium med : set)
+				if (med.getId() == Integer.parseInt(req.getParameter("id")))
+					deleteObject = med;
+			set.remove(deleteObject);
 			redirect = "shoppingBasket.jsp";
 		}
 		else if (req.getParameter("play")!= null){
@@ -64,7 +64,7 @@ public class ShoppingBasket extends HttpServlet {
 			redirect = "print.jsp";
 		}
 		else if (req.getParameter("back")!= null){
-			redirect = "allMedia.jsp";
+			redirect = "AllMediaProcessing";
 		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);

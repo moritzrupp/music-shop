@@ -50,6 +50,15 @@
   	<url-pattern>/TypeProcessing</url-pattern> 
   </servlet-mapping>
   
+    <servlet>
+  	<servlet-name>ShoppingBasket</servlet-name>
+  	<servlet-class>control.ShoppingBasket</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ShoppingBasket</servlet-name>
+  	<url-pattern>/ShoppingBasket</url-pattern> 
+  </servlet-mapping>
+  
   <error-page>
     <error-code>500</error-code>
     <location>/error500.jsp</location>

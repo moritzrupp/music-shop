@@ -1,10 +1,8 @@
 package control;
 
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
 import java.util.TreeSet;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -44,12 +42,15 @@ public class AllMediaProcessing extends HttpServlet {
 	        req.setAttribute("medium", sqlController.getObjectById("model.Medium", id));
 		}
 		else if (req.getParameter("buy")!= null){
+			
 			if (req.getSession().getAttribute("shoppingBasket") == null)
 				req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
 			@SuppressWarnings("unchecked")
 			Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
 			set.add((Medium)sqlController.getObjectById("model.Medium", new Integer(req.getParameter("id"))));
 			req.getSession().setAttribute("shoppingBasket", set);
+			this.doGet(req, resp);
+			return;
 		}
 		else if (req.getParameter("play")!= null){
 			
@@ -71,7 +72,7 @@ public class AllMediaProcessing extends HttpServlet {
 			redirect = "new_album.jsp";
 		}
 		else if (req.getParameter("shoppingBasket")!= null){
-			//TODO open shopping basket
+			redirect = "shoppingBasket.jsp";
 		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);

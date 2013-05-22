@@ -1,12 +1,17 @@
 package control;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.TreeSet;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.Medium;
 
 
 public class AllAlbumsProcessing extends HttpServlet {
@@ -37,8 +42,13 @@ public class AllAlbumsProcessing extends HttpServlet {
 	        Integer id = new Integer(req.getParameter("id"));	 
 	        req.setAttribute("album", sqlController.getObjectById("model.Album", id));
 		}
-		else if (req.getParameter("buy")!= null){
-			//TODO buy the album
+		else if (req.getParameter("buy")!= null){		    
+		if (req.getSession().getAttribute("shoppingBasket") == null)
+			req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
+		@SuppressWarnings("unchecked")
+		Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
+		set.addAll((List<Medium>)sqlController.getAllMediaFromAlbum(new Integer(req.getParameter("id"))));
+		req.getSession().setAttribute("shoppingBasket", set);
 		}
 		else if (req.getParameter("play")!= null){
 			//TODO play the album
@@ -53,7 +63,7 @@ public class AllAlbumsProcessing extends HttpServlet {
 			redirect = "new_album.jsp";
 		}
 		else if (req.getParameter("shoppingBasket")!= null){
-			//TODO open shopping basket
+			redirect = "shoppingBasket.jsp";
 		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);

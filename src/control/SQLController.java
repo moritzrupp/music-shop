@@ -86,32 +86,6 @@ public class SQLController {
 			return result;
 		}
 	}
-//	
-//	/**
-//	 * Fetches the medium with the appropriate id.
-//	 * 
-//	 * @return A Object of {@link Medium}. <tt>null</tt> if the id doesn't exist.
-//	 */
-//	@SuppressWarnings("unchecked")
-//	public Medium getMedium(int id) {
-//
-//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		session.beginTransaction();
-//		return (Medium) session.get(Medium.class, id);
-//	}
-//	
-//	/**
-//	 * Fetches the album with the appropriate id.
-//	 * 
-//	 * @return A Object of {@link Album}. <tt>null</tt> if the id doesn't exist.
-//	 */
-//	@SuppressWarnings("unchecked")
-//	public Album getAlbum(int id) {
-//
-//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		session.beginTransaction();
-//		return (Album) session.get(Album.class, id);
-//	}
 
 	/**
 	 * Fetches all media types in the database.
@@ -208,6 +182,31 @@ public class SQLController {
 		result = session.createQuery("from Medium where sold >= " + limit).list();
 		session.getTransaction().commit();
 		
+		if (result.isEmpty()) {
+
+			return null;
+		} else {
+
+			return result;
+		}
+	}
+	
+	/**
+	 * Fetches all media in the database where the AlbumID matches.
+	 * 
+	 * @return A list with all {@link Medium} objects according to the AlbumID. <tt>null</tt> if the list
+	 *         is empty.
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Medium> getAllMediaFromAlbum(Integer AlbumId) {
+
+		List<Medium> result;
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		result = session.createQuery("from Medium where Album.ID =" + AlbumId).list();
+		session.getTransaction().commit();
+
 		if (result.isEmpty()) {
 
 			return null;
