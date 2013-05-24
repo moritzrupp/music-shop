@@ -47,7 +47,7 @@ public class AllAlbumsProcessing extends HttpServlet {
 			req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
 		@SuppressWarnings("unchecked")
 		Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
-		set.addAll((List<Medium>)sqlController.getAllMediaFromAlbum(new Integer(req.getParameter("id"))));
+		set.addAll(sqlController.getAllMediaFromAlbum(new Integer(req.getParameter("id"))));
 		req.getSession().setAttribute("shoppingBasket", set);
 		}
 		else if (req.getParameter("play")!= null){

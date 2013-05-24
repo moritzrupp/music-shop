@@ -204,7 +204,7 @@ public class SQLController {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		result = session.createQuery("from Medium where Album.ID =" + AlbumId).list();
+		result = session.createQuery("from Medium where albums_album_id =" + AlbumId).list();
 		session.getTransaction().commit();
 
 		if (result.isEmpty()) {

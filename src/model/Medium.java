@@ -168,11 +168,6 @@ public class Medium implements Comparable{
 				+ "]";
 	}
 
-	public int compareTo(Medium med) {
-		
-		return this.mId-med.mId;
-	}
-
 	@Override
 	public int compareTo(Object o) throws ClassCastException {
 		 if (!(o instanceof Medium))
