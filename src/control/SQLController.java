@@ -168,17 +168,18 @@ public class SQLController {
 	 * 
 	 * @param x
 	 *            The minimum <tt>listened</tt> value.
+	 * @param limit The limit of media.
 	 * @return A list with the {@link Medium} objects which fulfil the
 	 *         requirements. <tt>null</tt> if the list is empty.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Medium> getTopPlayedMedia(int x) {
+	public List<Medium> getTopPlayedMedia(int x, int limit) {
 
 		List<Medium> result;
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		result = session.createQuery("from Medium where listened >= " + x).list();
+		result = session.createQuery("from Medium where listened >= " + x + " and rownum <= " + limit + " order by listened DESC").list();
 		session.getTransaction().commit();
 		
 		if (result.isEmpty()) {
@@ -193,19 +194,20 @@ public class SQLController {
 	/**
 	 * Fetches all media with a <tt>sold</tt> value of at least <tt>limit</tt>
 	 * 
-	 * @param limit
+	 * @param x
 	 *            The minimum <tt>sold</tt> value.
+	 * @param limit The limit of media.
 	 * @return A list with the {@link Medium} objects which fulfil the
 	 *         requirements. <tt>null</tt> if the list is empty.
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Medium> getTopBoughtMedia(int limit) {
+	public List<Medium> getTopBoughtMedia(int x, int limit) {
 
 		List<Medium> result;
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		result = session.createQuery("from Medium where sold >= " + limit).list();
+		result = session.createQuery("from Medium where sold >= " + x + " and rownum <= " + limit + " order by sold DESC").list();
 		session.getTransaction().commit();
 		
 		if (result.isEmpty()) {

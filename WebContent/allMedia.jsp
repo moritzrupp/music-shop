@@ -18,7 +18,7 @@
 	<button type="submit" name="newMedium" id="newMedium" value="newMedium">New Medium</button>
 </form>
 <form action="ShowStatistic" method="get">
-	<button type="submit" name="showStatistic" id="showStatistic">Show Statistic</button>
+	<button>Show Statistic</button>
 </form>
 <h1>All Media</h1>
         <table>

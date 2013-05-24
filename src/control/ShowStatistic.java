@@ -22,9 +22,9 @@ public class ShowStatistic extends HttpServlet {
 		String redirect = "statistic.jsp";
 		int num = (req.getParameter("num") != null) ? Integer.parseInt(req.getParameter("num")) : 5;
 		int limit = (req.getParameter("limit") != null) ? Integer.parseInt(req.getParameter("limit")) : 5;
-		
-		List<Medium> topPlayed = sqlController.getTopPlayedMedia(num);
-		List<Medium> topBought = sqlController.getTopBoughtMedia(limit);
+				
+		List<Medium> topPlayed = sqlController.getTopPlayedMedia(0, num);
+		List<Medium> topBought = sqlController.getTopBoughtMedia(0, limit);
 		
 		req.getSession().setAttribute("topPlayed", topPlayed);
 		req.getSession().setAttribute("topBought", topBought);
