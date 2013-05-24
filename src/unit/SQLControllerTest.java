@@ -44,28 +44,28 @@ public class SQLControllerTest {
 	@Test
 	public void getTopPlayedMedia1() {
 		
-		List<Medium> result = controller.getTopPlayedMedia(1);
+		List<Medium> result = controller.getTopPlayedMedia(1, 5);
 		System.out.println("Top played media (at least " + 1 + "): " + result);
 	}
 	
 	@Test
 	public void getTopBoughtMedia1() {
 		
-		List<Medium> result = controller.getTopBoughtMedia(1);
+		List<Medium> result = controller.getTopBoughtMedia(1, 5);
 		System.out.println("Top bought media (at least " + 1 + "): " + result);
 	}
 	
 	@Test
 	public void getTopPlayedMedia0() {
 		
-		List<Medium> result = controller.getTopPlayedMedia(0);
+		List<Medium> result = controller.getTopPlayedMedia(0, 5);
 		System.out.println("Top played media (at least " + 0 + "): " + result);
 	}
 	
 	@Test
 	public void getTopBoughtMedia0() {
 		
-		List<Medium> result = controller.getTopBoughtMedia(0);
+		List<Medium> result = controller.getTopBoughtMedia(0, 5);
 		System.out.println("Top bought media (at least " + 0 + "): " + result);
 	}
 }
