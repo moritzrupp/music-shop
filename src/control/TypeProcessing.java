@@ -144,6 +144,8 @@ public class TypeProcessing extends HttpServlet {
 					
 					Files.copy(tmpFile.toPath(), storaFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("icon"));
+					request.getSession().removeAttribute("icon");
+					request.getSession().removeAttribute("type");
 				}
 				catch(ConstraintViolationException cve) {
 					

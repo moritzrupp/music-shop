@@ -25,6 +25,7 @@ public class AllMediaProcessing extends HttpServlet {
 		request.setAttribute("media", sqlController.getAllMedia());
 		redirect = "/allMedia.jsp";
 
+		request.getSession().removeAttribute("medium");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
 		dispatcher.forward(request, response);

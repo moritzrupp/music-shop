@@ -144,6 +144,9 @@ public class AlbumProcessing extends HttpServlet {
 					
 					Files.copy(tmpFile.toPath(), storaFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
+					
+					request.getSession().removeAttribute("cover");
+					request.getSession().removeAttribute("album");
 				}
 				catch(ConstraintViolationException cve) {
 					

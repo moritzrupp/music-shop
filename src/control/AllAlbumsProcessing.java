@@ -1,9 +1,8 @@
 package control;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.TreeSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,6 +25,7 @@ public class AllAlbumsProcessing extends HttpServlet {
 		request.setAttribute("albums", sqlController.getAllAlbums());
 		redirect = "/allAlbums.jsp";
 
+		request.getSession().removeAttribute("album");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
 		dispatcher.forward(request, response);
