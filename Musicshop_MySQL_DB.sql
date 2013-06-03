@@ -25,7 +25,7 @@ CREATE TABLE `musicshop`.`media` (
   `title` varchar(50) NOT NULL,
   `interpreter` varchar(50) NOT NULL,
   `duration` varchar(8) NOT NULL,
-  `filesize` int(11) NOT NULL,
+  `filesize` bigint(20) NOT NULL,
   `medium_path` varchar(255) NOT NULL,
   `no_listened` int(11) NOT NULL DEFAULT '0',
   `no_sold` int(11) NOT NULL DEFAULT '0',

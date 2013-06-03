@@ -4,9 +4,9 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.password"></property> <!-- Please leave password blank -->
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@37.221.193.194:23987:xe</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/musicshop</property>
         <property name="hibernate.connection.username">root</property> <!-- Please leave username 'root' -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
         <property name="show_sql">true</property>
