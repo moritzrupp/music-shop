@@ -36,7 +36,7 @@
 
 						<button type="submit" name="play" id="play" value="play">Play</button>
 						</form>
-	                </td>
+		           </td>
                 </tr>
 
             </c:forEach>

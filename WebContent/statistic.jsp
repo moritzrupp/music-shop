@@ -53,7 +53,7 @@
 					<tr>
 						<td>Title</td>
 						<td>Interpreter</td>
-						<td>Played</td>
+						<td>Bought</td>
 					</tr>
 				</thead>
 				<tbody>
