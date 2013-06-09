@@ -177,6 +177,9 @@ public class MediumProcessing extends HttpServlet {
 					
 					((OutputStream)request.getSession().getAttribute("file")).flush();
 					((OutputStream)request.getSession().getAttribute("file")).close();
+					
+					request.getSession().removeAttribute("medium");
+					request.getSession().removeAttribute("file");
 				}
 				catch(ConstraintViolationException cve) {
 					

@@ -11,7 +11,7 @@
 <body>
 	<h1>Statistics</h1>
 	
-	<div style="width:800px">
+	<div style="width:800px;">
 		<div style="float:left;">
 			<h2>Top played media</h2>
 			<table>
@@ -43,6 +43,13 @@
 					<option>50</option>
 				</select>
 				<button type="submit">Show</button>
+			</form>
+			
+			<br />
+			<br />
+			
+			<form method="get" action="AllMediaProcessing">
+				<button type="submit" name="back" id="back">Back</button>
 			</form>
 		</div>
 	
