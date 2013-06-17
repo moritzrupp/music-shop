@@ -20,9 +20,8 @@ To do's
 * ~~After clicking on back buttons objects in the session have to be deleted (Mo)~~
 * The navigation of <code>AllAlbums</code> has to be removed and the back button has to link to <code>AllMedia</code> (Jule)
 * Back navigation with GET-Parameter (Jule) *In my opinion it should work, but i cant test it, cause of the error below*
-* ~~You cannot buy an album from the detail page (Jule)~~
-* WIN only "Unexpected internal error near index 1" - Error after trying to upload a coverpic. Error occurs in line 201 ="split = (delFile.toString()).split("\\");"
-	(Occurs while creating a new album or a new MediaType)
+* ~~You cannot buy an album from the detail page (Jule)~~ *Jule: there is a redirection to the index, that's wrong!*
+* `Continue` button after entering data redirects to `AllMedia`, but no db query is triggered (Jule)
 * Make sure that there is no album without a medium. Page flow: album -> new medium -> album (Mo)
 
 #####Completely finished pages:
@@ -31,6 +30,14 @@ To do's
  - type_processing.jsp
  - medium_processing.jsp
  - print.jsp
+ - album_confirmation.jsp
+ - medium_confirmation.jsp
+ - type_confirmation.jsp
+ - new_type.jsp
+ - statistic.jsp
+ - player.jsp
+ - shoppingBasket.jsp
+ - new_medium.jsp
  
 #####Pages could be deleted:
  - DevEnvTest.jsp
@@ -44,4 +51,4 @@ To do's
  
 #####Incorrect navigation:
  - Back navigation from album details -> medium details doesn't work correctly. Navigates back to <code>AllMedia</code> instead of <code>AllAlbums</code>
- 
+ - When navigate back from the shopping basket you always go to `AllMedia` (sometimes you have to go to `AllAlbums`) 
