@@ -37,6 +37,11 @@ public class AlbumProcessing extends HttpServlet {
 			throws ServletException, IOException {
 		String redirect = "";
 		
+		if (req.getParameter("continue")!=null)
+		{
+			redirect = "/allMedia.jsp";
+		}
+		
 		if (req.getParameter("back")!=null)
 			redirect=req.getParameter("back");
 		

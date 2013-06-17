@@ -20,7 +20,7 @@ To do's
 * ~~After clicking on back buttons objects in the session have to be deleted (Mo)~~
 * The navigation of <code>AllAlbums</code> has to be removed and the back button has to link to <code>AllMedia</code> (Jule)
 * Back navigation with GET-Parameter (Jule)
-* You cannot buy an album from the detail page (Jule)
+<<COMMENT>> In my opinion it should work, but i cant test it, cause of the error below <<COMMENT>>* You cannot buy an album from the detail page (Jule)
 
 * WIN only "Unexpected internal error near index 1" - Error after trying to upload a coverpic. Error occurs in line 201 ="split = (delFile.toString()).split("\\");"
 	(Occurs while creating a new album or a new MediaType)

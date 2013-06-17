@@ -9,5 +9,8 @@
 <body>
 	<h1>New Album Processed</h1>
 	<p>Album entry successful.</p>
+			<form action="AlbumProcessing">
+	<button type="submit" name="continue" id="continue">Continue</button>
+	</form>
 </body>
 </html>

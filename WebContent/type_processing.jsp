@@ -10,5 +10,8 @@
 <h1>New Media Type Processed</h1>
 
 	<p>Media type entry successful.</p>
+	<form action="TypeProcessing">
+	<button type="submit" name="continue" id="continue">Continue</button>
+	</form>
 </body>
 </html>

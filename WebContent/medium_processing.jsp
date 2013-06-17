@@ -10,5 +10,8 @@
 <h1>New Medium Processed</h1>
 
 	<p>Medium entry successful.</p>
+		<form action="MediumProcessing">
+	<button type="submit" name="continue" id="continue">Continue</button>
+	</form>
 </body>
 </html>

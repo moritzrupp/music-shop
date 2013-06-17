@@ -44,6 +44,11 @@ public class MediumProcessing extends HttpServlet {
 		List<Album> albums = sqlController.getAllAlbums();
 		req.getSession().setAttribute("types", types);
 		req.getSession().setAttribute("albums", albums);
+		 
+		if (req.getParameter("continue")!=null)
+		{
+			redirect = "/allMedia.jsp";
+		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
 		dispatcher.forward(req, resp);

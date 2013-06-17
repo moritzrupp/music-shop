@@ -164,6 +164,20 @@ public class TypeProcessing extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String redirect = req.getRequestURL().toString();
+		
+		if (req.getParameter("continue")!=null)
+		{
+			redirect = "allMedia.jsp";
+		}
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
+		dispatcher.forward(req, resp);
+	}
+
 	private void deleteFile(String filePath) throws IOException {
 		
 		File delFile = new File(filePath);

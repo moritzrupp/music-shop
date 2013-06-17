@@ -37,10 +37,11 @@ public class AllAlbumsProcessing extends HttpServlet {
 		String redirect = "";
 		
 		if (req.getParameter("details")!= null){
-			redirect = "albumDetails.jsp";
+			redirect = "albumDetails.jsp?back=\"" + req.getRequestURL()+ "\"" ;
 			
 	        Integer id = new Integer(req.getParameter("id"));	 
 	        req.setAttribute("album", sqlController.getObjectById("model.Album", id));
+	        
 		}
 		else if (req.getParameter("buy")!= null){		    
 		if (req.getSession().getAttribute("shoppingBasket") == null)
