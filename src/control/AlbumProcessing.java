@@ -33,6 +33,19 @@ public class AlbumProcessing extends HttpServlet {
 	private SQLController sqlController = new SQLController();
 
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		String redirect = "";
+		
+		if (req.getParameter("back")!=null)
+			redirect=req.getParameter("back");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
+		dispatcher.forward(req, resp);
+	}
+	
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String redirect = "";
@@ -185,14 +198,13 @@ public class AlbumProcessing extends HttpServlet {
 					String[] split;
 					
 					if(os.startsWith("win")) {
-						
 						split = (delFile.toString()).split("\\");
 					}
 					else {
 						
 						split = (delFile.toString()).split("/");
 					}
-					
+
 					String[] dirSplit = new String[split.length-1];
 					String path = "";
 					System.out.println("DEBUG (dirSplit.length): " + dirSplit.length);
@@ -200,7 +212,7 @@ public class AlbumProcessing extends HttpServlet {
 						
 						dirSplit[i] = split[i];
 					}
-					
+
 					for(int i = 0; i < dirSplit.length-1; i++) {
 						
 						path += dirSplit[i] + "/";

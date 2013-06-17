@@ -21,3 +21,7 @@ To do's
 * The navigation of <code>AllAlbums</code> has to be removed and the back button has to link to <code>AllMedia</code> (Jule)
 * Back navigation with GET-Parameter (Jule)
 * You cannot buy an album from the detail page (Jule)
+
+* WIN only "Unexpected internal error near index 1" - Error after trying to upload a coverpic. Error occurs in line 201 ="split = (delFile.toString()).split("\\");"
+	(Occurs while creating a new album or a new MediaType)
+
