@@ -25,3 +25,23 @@ To do's
 * WIN only "Unexpected internal error near index 1" - Error after trying to upload a coverpic. Error occurs in line 201 ="split = (delFile.toString()).split("\\");"
 	(Occurs while creating a new album or a new MediaType)
 
+Completely finished pages:
+ - album_processing.jsp
+ - type_processing.jsp
+ - medium_processing.jsp
+ - print.jsp
+ 
+Pages could be deleted:
+ - DevEnvTest.jsp
+ - index.jsp
+
+Pages missing:
+ - play a whole album???
+ - 
+ 
+Other items missing:
+ - 
+ 
+Incorrect navigation:
+ - 
+ 
