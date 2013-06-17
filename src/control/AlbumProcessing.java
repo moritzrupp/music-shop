@@ -203,7 +203,7 @@ public class AlbumProcessing extends HttpServlet {
 					String[] split;
 					
 					if(os.startsWith("win")) {
-						split = (delFile.toString()).split("\\");
+						split = (delFile.toString()).split("\\\\");
 					}
 					else {
 						

@@ -199,7 +199,7 @@ public class TypeProcessing extends HttpServlet {
 					
 					if(os.startsWith("win")) {
 						
-						split = (delFile.toString()).split("\\");
+						split = (delFile.toString()).split("\\\\");
 					}
 					else {
 						
