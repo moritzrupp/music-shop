@@ -10,7 +10,7 @@
 <h1>New Medium Processed</h1>
 
 	<p>Medium entry successful.</p>
-		<form action="MediumProcessing">
+		<form action="AllMediaProcessing">
 	<button type="submit" name="continue" id="continue">Continue</button>
 	</form>
 </body>

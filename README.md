@@ -19,9 +19,9 @@ To do's
 * ~~After insertig a medium, an album of a media type the object in the session has to be deleted (Mo)~~
 * ~~After clicking on back buttons objects in the session have to be deleted (Mo)~~
 * The navigation of <code>AllAlbums</code> has to be removed and the back button has to link to <code>AllMedia</code> (Jule)
-* Back navigation with GET-Parameter (Jule) *In my opinion it should work, but i cant test it, cause of the error below*
+* Back navigation with GET-Parameter (Jule) 
+*In my opinion it should work, but i cant test it, cause of the error below*
 * ~~You cannot buy an album from the detail page (Jule)~~ *Jule: there is a redirection to the index, that's wrong!*
-* `Continue` button after entering data redirects to `AllMedia`, but no db query is triggered (Jule)
 * Make sure that there is no album without a medium. Page flow: album -> new medium -> album (Mo)
 
 #####Completely finished pages:

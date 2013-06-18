@@ -10,6 +10,7 @@
 </head>
 <body>
 <form action="AllMediaProcessing" method="post" style="float:left;">
+	<button type="submit" name="allAlbums" id="allAlbums" value="allAlbums">All Albums</button>
 	<button type="submit" name="shoppingBasket" id="shoppingBasket" value="shoppingBasket">Shopping Basket</button>
 	<button type="submit" name="newType" id="newType" value="newType">New Type</button>
 	<button type="submit" name="newAlbum" id="newAlbum" value="newAlbum">New Album</button>

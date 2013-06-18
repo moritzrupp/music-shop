@@ -61,6 +61,7 @@ public class ShoppingBasket extends HttpServlet {
 				med.setSold(med.getSold()+1);
 				sqlController.saveObject(med);
 			}
+			req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
 			redirect = "print.jsp";
 		}
 		else if (req.getParameter("back")!= null){

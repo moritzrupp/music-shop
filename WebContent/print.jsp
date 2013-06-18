@@ -9,5 +9,8 @@
 <body>
 <h1>Print</h1>
 You bought ${numbers} items.
+			<form action="AllMediaProcessing">
+	<button type="submit" name="continue" id="continue" value="del">Continue</button>
+	</form>
 </body>
 </html>

@@ -34,10 +34,10 @@ public class AllAlbumsProcessing extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String redirect = "";
+		String redirect = "/allAlbums.jsp";
 		
 		if (req.getParameter("details")!= null){
-			redirect = "albumDetails.jsp?back=\"" + req.getRequestURL()+ "\"" ;
+			redirect = "albumDetails.jsp?back=" + req.getRequestURL();
 			
 	        Integer id = new Integer(req.getParameter("id"));	 
 	        req.setAttribute("album", sqlController.getObjectById("model.Album", id));
@@ -50,12 +50,18 @@ public class AllAlbumsProcessing extends HttpServlet {
 		Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
 		set.addAll(sqlController.getAllMediaFromAlbum(new Integer(req.getParameter("id"))));
 		req.getSession().setAttribute("shoppingBasket", set);
+		System.out.println(req.getRequestURL().toString());
+		redirect="AllAlbumsProcessing";
 		}
 		else if (req.getParameter("play")!= null){
 			//TODO play the album
 		}
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";
+		}
+		else if (req.getParameter("allMedia")!= null){
+			req.setAttribute("media", sqlController.getAllMedia());
+			redirect = "AllMediaProcessing";
 		}
 		else if (req.getParameter("newMedium")!= null){
 			redirect = "new_medium.jsp";

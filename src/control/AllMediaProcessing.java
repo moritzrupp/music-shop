@@ -23,6 +23,10 @@ public class AllMediaProcessing extends HttpServlet {
 		String redirect = "/allMedia.jsp";
 		
 		request.setAttribute("media", sqlController.getAllMedia());
+		if (request.getParameter("continue")!=null)
+		{
+			redirect = "/allMedia.jsp";
+		}
 		redirect = "/allMedia.jsp";
 
 		request.getSession().removeAttribute("medium");
@@ -34,7 +38,7 @@ public class AllMediaProcessing extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		String redirect = "";
+		String redirect = "/allMedia.jsp";
 		
 		if (req.getParameter("details")!= null){
 			redirect = "mediumDetails.jsp";
@@ -62,6 +66,10 @@ public class AllMediaProcessing extends HttpServlet {
 	        
 	        m.setListened(m.getListened()+1);
 	        sqlController.saveObject(m);
+		}
+		else if (req.getParameter("allAlbums")!= null){
+			req.setAttribute("albums", sqlController.getAllAlbums());
+			redirect = "AllAlbumsProcessing";
 		}
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";
