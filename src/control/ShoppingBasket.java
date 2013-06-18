@@ -18,6 +18,20 @@ public class ShoppingBasket extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private SQLController sqlController = new SQLController();
 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+
+		String redirect = "";
+		
+		if (req.getParameter("back")!=null)
+			redirect = req.getParameter("back");
+		
+		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
+		dispatcher.forward(req, resp);   
+		
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)

@@ -51,4 +51,4 @@ To do's
  
 #####Incorrect navigation:
  - Back navigation from album details -> medium details doesn't work correctly. Navigates back to <code>AllMedia</code> instead of <code>AllAlbums</code>
- - When navigate back from the shopping basket you always go to `AllMedia` (sometimes you have to go to `AllAlbums`) 
+**#DONE#** - When navigate back from the shopping basket you always go to `AllMedia` (sometimes you have to go to `AllAlbums`) 

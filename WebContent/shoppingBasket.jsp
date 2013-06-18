@@ -46,8 +46,8 @@
             </tbody>
         </table>
         
-	<form action="AllMediaProcessing">
-		<button type="submit" name="back" id="back">Back</button>
+	<form action="ShoppingBasket">
+		<button type="submit" name="back" id="back" value="${back}">Back</button>
 	</form>
 	<form method="post"  action="ShoppingBasket">	
 		<button type="submit" name="clear" id="clear" value="clear">Clear</button>

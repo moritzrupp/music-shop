@@ -70,6 +70,8 @@ public class AllAlbumsProcessing extends HttpServlet {
 			redirect = "new_album.jsp";
 		}
 		else if (req.getParameter("shoppingBasket")!= null){
+
+			req.setAttribute("back", "AllAlbumsProcessing");
 			redirect = "shoppingBasket.jsp";
 		}
 		

@@ -81,7 +81,9 @@ public class AllMediaProcessing extends HttpServlet {
 			redirect = "new_album.jsp";
 		}
 		else if (req.getParameter("shoppingBasket")!= null){
+			req.setAttribute("back", "AllMediaProcessing");
 			redirect = "shoppingBasket.jsp";
+
 		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
