@@ -38,9 +38,7 @@
 				<form method="post"  action="AllMediaProcessing">
 				<input type="hidden" name="id" value="${medium.id}">
 				<button type="submit" name="buy" id="buy" value="buy">Buy</button>
-				
-				<button type="submit" name="details" id="details" value="details">Details</button>
-				
+				<button type="submit" name="details" id="details" value="${album.id}">Details</button>
 				<button type="submit" name="play" id="play" value="play">Play</button>
 				</form>
            </td>
@@ -54,7 +52,6 @@
 <form method="post"  action="AllAlbumsProcessing">
 <input type="hidden" name="id" value="${medium.id}">
 <button type="submit" name="buy" id="buy" value="buy">Buy</button>
-<button type="submit" name="play" id="play" value="play">Play</button>
 </form>
 </body>
 </html>

@@ -20,10 +20,16 @@ public class AllAlbumsProcessing extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String redirect = "/allAlbums.jsp";
+		String redirect = "";
 		
 		request.setAttribute("albums", sqlController.getAllAlbums());
 		redirect = "/allAlbums.jsp";
+		
+		if (request.getParameter("back")!="")
+		{
+			redirect = "albumDetails.jsp";
+	        request.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(request.getParameter("back"))));
+		}
 
 		request.getSession().removeAttribute("album");
 		
@@ -37,10 +43,9 @@ public class AllAlbumsProcessing extends HttpServlet {
 		String redirect = "/allAlbums.jsp";
 		
 		if (req.getParameter("details")!= null){
-			redirect = "albumDetails.jsp?back=" + req.getRequestURL();
+			redirect = "albumDetails.jsp";
 			
-	        Integer id = new Integer(req.getParameter("id"));	 
-	        req.setAttribute("album", sqlController.getObjectById("model.Album", id));
+	        req.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(req.getParameter("id"))));
 	        
 		}
 		else if (req.getParameter("buy")!= null){		    
