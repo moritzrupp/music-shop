@@ -49,9 +49,8 @@ public class Medium implements Comparable{
 		this.mMediaType = mMediaType;
 		this.mAlbum = mAlbum;
 		
-		// TODO calculate filesize and duration from file
 		this.mFileSize = 0;
-		this.mDuration = "1";
+		this.mDuration = "00:00";
 		
 		this.mListened = 0;
 		this.mSold = 0;

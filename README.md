@@ -15,18 +15,19 @@ __Julian Schobert__: [julian.schobert@gmail.com](julian.schobert@gmail.com)
 To do's
 --------
 
-* Calculation of the duration of a medium (Mo)
-* Make sure that there is no album without a medium. Page flow: album -> new medium -> album (Mo)
+- Back button of the player isn't working correctly (Jule)
 
 #####Completely finished pages:
 
 - album_confirmation.jsp
+- albumDetails.jsp
 - album_processing.jsp
-- 
+- allAlbums.jsp
 - allMedia.jsp
 - error500.jsp
 - medium_confirmation.jsp
 - medium_processing.jsp
+- new_album.jsp
 - new_medium.jsp
 - new_type.jsp
 - print.jsp
@@ -37,7 +38,4 @@ To do's
 
 #####Pages not yet finished
 
-- albumDetails.jsp
-- allAlbums.jsp
-- new_album.jsp
 - player.jsp

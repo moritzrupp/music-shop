@@ -27,8 +27,11 @@
 				
 				<label for="mediumInterpreter">Interpreter:</label>
 				<input type="text" id="mediumInterpreter" name="mediumInterpreter" value="${ medium.interpreter }" required /><br />
-	
-				<label for="mediumAlbum"></label>
+				
+				<label for="mediumDuration">Duration:</label>
+				<input type="text" id ="mediumDuration" name="mediumDuration" value="${ medium.duration }" required /> (Format: <span style="font-style: italic;">mm:ss</span>)<br />
+				
+				<label for="mediumAlbum">Album:</label>
 				<select id="mediumAlbum" name="mediumAlbum">
 					<option value="-1">No album</option>
 					<core:if test="${ albums != null }">

@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Scanner;
 
@@ -102,10 +104,21 @@ public class MediumProcessing extends HttpServlet {
 								
 								if(id != -1) {
 									
+									
 									Album album = (Album)sqlController.getObjectById("model.Album", id);
-									album.addMediumToAlbum(medium);
-									sqlController.saveObject(album);
+
+									if(!(album == null && (boolean)request.getSession().getAttribute("include") == true)) {
+										
+										album.addMediumToAlbum(medium);
+										sqlController.saveOrUpdateObject(album);
+									}
 								}
+								break;
+							
+							case "mediumDuration":
+								
+								medium.setDuration(writeStreamToString(stream));
+								break;
 								
 							case "mediumSubmit":
 								
@@ -119,10 +132,10 @@ public class MediumProcessing extends HttpServlet {
 						
 						if(medium.getAlbum() != null) {
 							
-							album = medium.getAlbum().getName();
+							album = "/" + medium.getAlbum().getName();
 						}
 						
-						File path = new File(getServletContext().getRealPath("/") + "storage/media/" + medium.getInterpreter() + "/" + album);
+						File path = new File(getServletContext().getRealPath("/") + "storage/media/" + medium.getInterpreter() + album);
 												
 						if (!path.exists()) {
 							
@@ -152,11 +165,8 @@ public class MediumProcessing extends HttpServlet {
 							throw new ServletException("Error while writing the uploaded file to disk. Please contact and administrator.", ioe);
 						}
 						
-						//TODO Read file duration.
-						
-						medium.setDuration("00:00");
 						medium.setFileSize(uploadedFile.length());
-						medium.setFileLocation("storage/media/" + medium.getInterpreter() + "/" + album + "/" + medium.getTitle() + suffix);
+						medium.setFileLocation("storage/media/" + medium.getInterpreter() + album + "/" + medium.getTitle() + suffix);
 					}
 				}
 				
@@ -176,15 +186,52 @@ public class MediumProcessing extends HttpServlet {
 			else if(request.getParameter("mediumConfirm") != null) {
 				
 				try {
+										
+					if(request.getSession().getAttribute("include") != null && (boolean)request.getSession().getAttribute("include") == true) {
+						
+						redirect = "/album_processing.jsp";
+						
+						int id = sqlController.saveObject(request.getSession().getAttribute("album"));
+						Album album = (Album) sqlController.getObjectById("model.Album", id);
+						album.addMediumToAlbum((Medium)request.getSession().getAttribute("medium"));
+						sqlController.saveOrUpdateObject(album);
+						
+						sqlController.saveOrUpdateObject(request.getSession().getAttribute("medium"));
+						
+						((OutputStream)request.getSession().getAttribute("file")).flush();
+						((OutputStream)request.getSession().getAttribute("file")).close();
+						
+						request.getSession().removeAttribute("medium");
+						request.getSession().removeAttribute("file");
+						
+						File storaFile = (File)request.getSession().getAttribute("storaFile");
+						File tmpFile = (File)request.getSession().getAttribute("tmpFile");
+
+						if(!storaFile.exists()) {
+							
+							storaFile.mkdirs();
+						}
+						
+						Files.copy(tmpFile.toPath(), storaFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+						deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
+						
+						request.getSession().removeAttribute("cover");
+						request.getSession().removeAttribute("album");
+						request.getSession().removeAttribute("tmpFile");
+						request.getSession().removeAttribute("storaFile");
+						request.getSession().removeAttribute("include");
+					}
+					else {
 					
-					redirect = "/medium_processing.jsp";
-					sqlController.saveObject(request.getSession().getAttribute("medium"));
-					
-					((OutputStream)request.getSession().getAttribute("file")).flush();
-					((OutputStream)request.getSession().getAttribute("file")).close();
-					
-					request.getSession().removeAttribute("medium");
-					request.getSession().removeAttribute("file");
+						redirect = "/medium_processing.jsp";
+						sqlController.saveOrUpdateObject(request.getSession().getAttribute("medium"));
+						
+						((OutputStream)request.getSession().getAttribute("file")).flush();
+						((OutputStream)request.getSession().getAttribute("file")).close();
+						
+						request.getSession().removeAttribute("medium");
+						request.getSession().removeAttribute("file");
+					}
 				}
 				catch(ConstraintViolationException cve) {
 					
@@ -235,7 +282,7 @@ public class MediumProcessing extends HttpServlet {
 					
 					String[] dirSplit = new String[split.length-1];
 					String path = "";
-					System.out.println("DEBUG (dirSplit.length): " + dirSplit.length);
+
 					for(int i = 0; i < dirSplit.length; i++) {
 						
 						dirSplit[i] = split[i];
@@ -246,7 +293,6 @@ public class MediumProcessing extends HttpServlet {
 						path += dirSplit[i] + "/";
 					}
 					path += dirSplit[dirSplit.length-1];
-					System.out.println("DEBUG (path): " + path);
 					
 					File dir = new File(path);
 

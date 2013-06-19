@@ -22,6 +22,14 @@
 </form>
 <h1>All Albums</h1>
         <table>
+        	<thead>
+	        	<tr>
+	        		<td>Album name</td>
+	        		<td>Interpreter</td>
+	        		<td>&nbsp;</td>
+	        	</tr>
+        	</thead>
+        	<tbody>
             <c:forEach var="album" items="${albums}">
                 <tr>
                     <td>
@@ -37,12 +45,12 @@
 
 						<button type="submit" name="details" id="details" value="details">Details</button>
 
-						<button type="submit" name="play" id="play" value="play">Play</button>
+						<!-- <button type="submit" name="play" id="play" value="play">Play</button> -->
 						</form>
 		           </td>
                 </tr>
-
             </c:forEach>
+            </tbody>
         </table>
 </body>
 </html>

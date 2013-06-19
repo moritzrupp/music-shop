@@ -29,12 +29,12 @@ public class AllMediaProcessing extends HttpServlet {
 		}
 		if (request.getParameter("back")!=null&& request.getParameter("back")!="" )
 		{
-			redirect = "albumDetails.jsp";
+			redirect = "/albumDetails.jsp";
 			try{
 	        request.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(request.getParameter("back"))));
 			}
 			catch (Exception e) {
-				redirect = "allMedia.jsp";
+				redirect = "/allMedia.jsp";
 			}
 		}
 
@@ -75,7 +75,7 @@ public class AllMediaProcessing extends HttpServlet {
 	        req.setAttribute("medium", m);
 	        
 	        m.setListened(m.getListened()+1);
-	        sqlController.saveObject(m);
+	        sqlController.saveOrUpdateObject(m);
 		}
 		else if (req.getParameter("allMedia")!= null){
 			req.setAttribute("media", sqlController.getAllMedia());

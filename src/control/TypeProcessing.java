@@ -132,7 +132,7 @@ public class TypeProcessing extends HttpServlet {
 				try {
 					
 					redirect = "/type_processing.jsp";
-					sqlController.saveObject(request.getSession().getAttribute("type"));
+					sqlController.saveOrUpdateObject(request.getSession().getAttribute("type"));
 					
 					File tmpFile = new File(getServletContext().getRealPath("/") + request.getSession().getAttribute("icon"));
 					File storaFile = new File(getServletContext().getRealPath("/") + ((MediaType)request.getSession().getAttribute("type")).getIcon());

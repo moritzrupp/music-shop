@@ -21,19 +21,33 @@ import org.hibernate.Session;
 public class SQLController {
 
 	/**
-	 * Saves an object in the database.
+	 * Saves or updates an object in the database.
 	 * 
 	 * @param obj The object to save.
-	 * @return Returns the id of the saved object.
 	 */
-	public void saveObject(Object obj) {
+	public void saveOrUpdateObject(Object obj) {
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.saveOrUpdate(obj);
 		session.getTransaction().commit();
 	}
-	
+
+	/**
+	 * Saves an object in the database.
+	 * 
+	 * @param obj The object to save.
+	 * @return Returns the id of the saved object.
+	 */
+	public int saveObject(Object obj) {
+		
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		int i = (Integer) session.save(obj);
+		session.getTransaction().commit();
+		
+		return i;
+	}
 	
 	/**
 	 * Reads an object from the database.

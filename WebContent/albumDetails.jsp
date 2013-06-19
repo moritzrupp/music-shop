@@ -25,7 +25,15 @@
 		</td>
 	</tr>
 </table>
+<br /><br />
 <table>
+	<thead>
+		<tr>
+			<td>Title</td>
+			<td>Interpreter</td>
+		</tr>
+	</thead>
+	<tbody>
     <c:forEach var="medium" items="${album.mediaList}">
         <tr>
             <td>
@@ -44,8 +52,9 @@
            </td>
           </tr>
       </c:forEach>
+      </tbody>
 </table>
-
+<br />
 <form action="AllAlbumsProcessing">
 <button type="submit" name="back" id="back">Back</button>
 </form>

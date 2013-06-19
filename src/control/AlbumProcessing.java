@@ -5,9 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
-import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Album;
+import model.MediaType;
 
 import org.apache.tomcat.util.http.fileupload.FileItemFactory;
 import org.apache.tomcat.util.http.fileupload.FileItemIterator;
@@ -146,22 +146,22 @@ public class AlbumProcessing extends HttpServlet {
 				
 				try {
 					
-					redirect = "/album_processing.jsp";
-					sqlController.saveObject(request.getSession().getAttribute("album"));
-					
 					File tmpFile = new File(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
 					File storaFile = new File(getServletContext().getRealPath("/") + ((Album)request.getSession().getAttribute("album")).getCoverPicture());
+
+					request.getSession().setAttribute("tmpFile", tmpFile);
+					request.getSession().setAttribute("storaFile", storaFile);	
 					
-					if(!storaFile.exists()) {
-						
-						storaFile.mkdirs();
-					}
-					
-					Files.copy(tmpFile.toPath(), storaFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-					deleteFile(getServletContext().getRealPath("/") + request.getSession().getAttribute("cover"));
-					
-					request.getSession().removeAttribute("cover");
-					request.getSession().removeAttribute("album");
+					List<MediaType> types = sqlController.getAllMediaTypes();
+					List<Album> albums = sqlController.getAllAlbums();
+										
+					albums.add((Album)request.getSession().getAttribute("album"));
+					request.getSession().setAttribute("types", types);
+					request.getSession().setAttribute("albums", albums);
+					request.getSession().setAttribute("include", true);
+					RequestDispatcher rd = request.getRequestDispatcher("/new_medium.jsp");
+					rd.include(request, response);
+					return;
 				}
 				catch(ConstraintViolationException cve) {
 					
@@ -209,7 +209,7 @@ public class AlbumProcessing extends HttpServlet {
 
 					String[] dirSplit = new String[split.length-1];
 					String path = "";
-					System.out.println("DEBUG (dirSplit.length): " + dirSplit.length);
+
 					for(int i = 0; i < dirSplit.length; i++) {
 						
 						dirSplit[i] = split[i];
@@ -220,7 +220,6 @@ public class AlbumProcessing extends HttpServlet {
 						path += dirSplit[i] + "/";
 					}
 					path += dirSplit[dirSplit.length-1];
-					System.out.println("DEBUG (path): " + path);
 					
 					File dir = new File(path);
 

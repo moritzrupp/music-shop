@@ -22,6 +22,9 @@
 		<label for="mediumInterpreter">Interpreter:</label>
 		<input readonly="readonly" type="text" id="mediumInterpreter" name="mediumInterpreter" value="${ medium.interpreter }" /><br />
 
+		<label for="mediumDuration">Duration:</label>
+		<input readonly="readonly" type="text" id ="mediumDuration" name="mediumDuration" value="${ medium.duration }" required /><br />
+
 		<label for="mediumAlbum">Album name:</label>
 		<input readonly="readonly" type="text" id="mediumAlbum" name="mediumAlbum" value="${ medium.album.name }" /><br />
 

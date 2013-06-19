@@ -61,7 +61,7 @@ public class ShoppingBasket extends HttpServlet {
 	        req.setAttribute("medium", m);
 	        
 	        m.setListened(m.getListened()+1);
-	        sqlController.saveObject(m);
+	        sqlController.saveOrUpdateObject(m);
 		}
 		else if (req.getParameter("clear")!= null){
 			req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
@@ -73,7 +73,7 @@ public class ShoppingBasket extends HttpServlet {
 				
 			for (Medium med : set){
 				med.setSold(med.getSold()+1);
-				sqlController.saveObject(med);
+				sqlController.saveOrUpdateObject(med);
 			}
 			req.getSession().setAttribute("shoppingBasket", new TreeSet<Medium>());
 			redirect = "print.jsp";
