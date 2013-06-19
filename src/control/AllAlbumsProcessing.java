@@ -25,11 +25,14 @@ public class AllAlbumsProcessing extends HttpServlet {
 		request.setAttribute("albums", sqlController.getAllAlbums());
 		redirect = "/allAlbums.jsp";
 		
-		if (request.getParameter("back")!="")
+		if (request.getParameter("back")!=null && request.getParameter("back")!="")
 		{
 			redirect = "albumDetails.jsp";
 	        request.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(request.getParameter("back"))));
-		}
+		}/* else if (request.getParameter("allAlbums")!= null){
+			request.setAttribute("albums", sqlController.getAllAlbums());
+			redirect = "AllAlbumsProcessing";
+		}*/
 
 		request.getSession().removeAttribute("album");
 		
@@ -63,10 +66,6 @@ public class AllAlbumsProcessing extends HttpServlet {
 		}
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";
-		}
-		else if (req.getParameter("allMedia")!= null){
-			req.setAttribute("media", sqlController.getAllMedia());
-			redirect = "AllMediaProcessing";
 		}
 		else if (req.getParameter("newMedium")!= null){
 			redirect = "new_medium.jsp";

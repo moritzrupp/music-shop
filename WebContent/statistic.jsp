@@ -48,7 +48,7 @@
 			<br />
 			<br />
 			
-			<form method="get" action="AllMediaProcessing">
+			<form action="AllMediaProcessing">
 				<button type="submit" name="back" id="back">Back</button>
 			</form>
 		</div>

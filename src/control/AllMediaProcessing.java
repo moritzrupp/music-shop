@@ -27,11 +27,15 @@ public class AllMediaProcessing extends HttpServlet {
 		{
 			redirect = "/allMedia.jsp";
 		}
-		if (request.getParameter("back")!=null)
+		if (request.getParameter("back")!=null&& request.getParameter("back")!="" )
 		{
 			redirect = "albumDetails.jsp";
-			
+			try{
 	        request.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(request.getParameter("back"))));
+			}
+			catch (Exception e) {
+				redirect = "allMedia.jsp";
+			}
 		}
 
 
@@ -73,10 +77,10 @@ public class AllMediaProcessing extends HttpServlet {
 	        m.setListened(m.getListened()+1);
 	        sqlController.saveObject(m);
 		}
-		else if (req.getParameter("allAlbums")!= null){
-			req.setAttribute("albums", sqlController.getAllAlbums());
-			redirect = "AllAlbumsProcessing";
-		}
+		else if (req.getParameter("allMedia")!= null){
+			req.setAttribute("media", sqlController.getAllMedia());
+			redirect = "AllMediaProcessing";
+		}	
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";
 		}
@@ -89,7 +93,6 @@ public class AllMediaProcessing extends HttpServlet {
 		else if (req.getParameter("shoppingBasket")!= null){
 			req.setAttribute("back", "AllMediaProcessing");
 			redirect = "shoppingBasket.jsp";
-
 		}
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
