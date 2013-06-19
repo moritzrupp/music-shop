@@ -28,11 +28,14 @@ public class AllAlbumsProcessing extends HttpServlet {
 		if (request.getParameter("back")!=null && request.getParameter("back")!="")
 		{
 			redirect = "albumDetails.jsp";
-	        request.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(request.getParameter("back"))));
-		}/* else if (request.getParameter("allAlbums")!= null){
-			request.setAttribute("albums", sqlController.getAllAlbums());
-			redirect = "AllAlbumsProcessing";
-		}*/
+	        
+			try{
+			request.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(request.getParameter("back"))));
+			}
+			catch (Exception e) {
+				redirect = "allAlbums.jsp";
+			}
+		}
 
 		request.getSession().removeAttribute("album");
 		
