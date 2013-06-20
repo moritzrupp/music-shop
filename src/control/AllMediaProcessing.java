@@ -76,6 +76,8 @@ public class AllMediaProcessing extends HttpServlet {
 	        
 	        m.setListened(m.getListened()+1);
 	        sqlController.saveOrUpdateObject(m);
+	        
+			req.setAttribute("back", req.getParameter("play"));
 		}
 		else if (req.getParameter("allMedia")!= null){
 			req.setAttribute("media", sqlController.getAllMedia());

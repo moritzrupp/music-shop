@@ -30,7 +30,7 @@
 	</core:choose>
 
 <form action="AllMediaProcessing">
-<button type="submit" name="back" id="back">Back</button>
+<button type="submit" name="back" id="back" value="${back}">Back</button>
 </form>
 
 </body>

@@ -64,9 +64,6 @@ public class AllAlbumsProcessing extends HttpServlet {
 		System.out.println(req.getRequestURL().toString());
 		redirect="AllAlbumsProcessing";
 		}
-		else if (req.getParameter("play")!= null){
-			//TODO play the album
-		}
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";
 		}
