@@ -26,7 +26,17 @@
 		<input readonly="readonly" type="text" id ="mediumDuration" name="mediumDuration" value="${ medium.duration }" required /><br />
 
 		<label for="mediumAlbum">Album name:</label>
-		<input readonly="readonly" type="text" id="mediumAlbum" name="mediumAlbum" value="${ medium.album.name }" /><br />
+		<input readonly="readonly" type="text" id="mediumAlbum" name="mediumAlbum" 
+			<core:choose>
+				<core:when test="${ include != null && include == true }">
+					value="${ album.name }"
+				</core:when>
+				<core:otherwise>
+					value="${ medium.album.name }"
+				</core:otherwise>
+			</core:choose>
+		/>
+		 <br />
 
 		<button type="submit" name="mediumEdit" id="mediumEdit">Edit</button>
 		<button type="submit" name="mediumConfirm" id="mediunComfirm">Confirm</button>

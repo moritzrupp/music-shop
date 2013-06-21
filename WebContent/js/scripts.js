@@ -5,5 +5,5 @@ function resetForm(oForm) {
 		oForm.elements[i].value = "";
 	}
 	
-	document.location = "index.jsp";
+	document.location = "AllMediaProcessing";
 }

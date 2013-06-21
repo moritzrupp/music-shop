@@ -32,18 +32,29 @@
 				<input type="text" id ="mediumDuration" name="mediumDuration" value="${ medium.duration }" required /> (Format: <span style="font-style: italic;">mm:ss</span>)<br />
 				
 				<label for="mediumAlbum">Album:</label>
-				<select id="mediumAlbum" name="mediumAlbum">
-					<option value="-1">No album</option>
-					<core:if test="${ albums != null }">
-						<core:forEach var="album" items="${ albums }">
-							<option value="${ album.id }"
-								<core:if test="${ medium.album.name == album.name }">
-									<core:out value="selected" />
-								</core:if>
-							><core:out value="${ album.name }" /></option>
-						</core:forEach>
-					</core:if>
-				</select><br />
+				
+				<core:choose>
+					<core:when test="${ include != null && include == true }">
+						<select id="mediumAlbum" name="mediumAlbum" disabled="disabled">
+							<option><core:out value="${ album.name }" /></option>
+						</select>
+					</core:when>
+					<core:otherwise>
+						<select id="mediumAlbum" name="mediumAlbum">
+							<option value="-1">No album</option>
+							<core:if test="${ albums != null }">
+								<core:forEach var="album" items="${ albums }">
+									<option value="${ album.id }"
+										<core:if test="${ medium.album.name == album.name }">
+											<core:out value="selected" />
+										</core:if>
+									><core:out value="${ album.name }" /></option>
+								</core:forEach>
+							</core:if>
+						</select>
+					</core:otherwise>
+				</core:choose>
+				<br />
 				
 				<label for="mediumFile">Upload:</label>
 				<input type="file" id="mediumFile" name="mediumFile" accept="audio/*, video/*" required /><br />
