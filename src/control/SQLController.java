@@ -167,7 +167,7 @@ public class SQLController {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		result = session.createQuery("from Medium where listened >= " + x + " order by listened DESC limit " + limit).list();
+		result = session.createQuery("from Medium where listened >= " + x + " order by listened DESC").setMaxResults(limit).list();
 		session.getTransaction().commit();
 		
 		if (result.isEmpty()) {
@@ -195,7 +195,7 @@ public class SQLController {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		result = session.createQuery("from Medium where sold >= " + x + " order by sold DESC limit " + limit).list();
+		result = session.createQuery("from Medium where sold >= " + x + " order by sold DESC").setMaxResults(limit).list();
 		session.getTransaction().commit();
 		
 		if (result.isEmpty()) {

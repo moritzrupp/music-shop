@@ -34,13 +34,13 @@
 			</table>
 			<form action="ShowStatistic" method="get">
 				<select name="num" id="num">
-					<option>5</option>
-					<option>10</option>
-					<option>15</option>
-					<option>20</option>
-					<option>30</option>
-					<option>40</option>
-					<option>50</option>
+					<option <core:if test="${ num == 5 }"><core:out value="selected"/></core:if> >5</option>
+					<option <core:if test="${ num == 10 }"><core:out value="selected"/></core:if> >10</option>
+					<option <core:if test="${ num == 15 }"><core:out value="selected"/></core:if> >15</option>
+					<option <core:if test="${ num == 20 }"><core:out value="selected"/></core:if> >20</option>
+					<option <core:if test="${ num == 30 }"><core:out value="selected"/></core:if> >30</option>
+					<option <core:if test="${ num == 40 }"><core:out value="selected"/></core:if> >40</option>
+					<option <core:if test="${ num == 50 }"><core:out value="selected"/></core:if> >50</option>
 				</select>
 				<button type="submit">Show</button>
 			</form>
@@ -75,13 +75,13 @@
 			</table>
 			<form action="ShowStatistic" method="get">
 				<select name="limit" id="limit">
-					<option>5</option>
-					<option>10</option>
-					<option>15</option>
-					<option>20</option>
-					<option>30</option>
-					<option>40</option>
-					<option>50</option>
+					<option <core:if test="${ limit == 5 }"><core:out value="selected"/></core:if> >5</option>
+					<option <core:if test="${ limit == 10 }"><core:out value="selected"/></core:if>>10</option>
+					<option <core:if test="${ limit == 15 }"><core:out value="selected"/></core:if>>15</option>
+					<option <core:if test="${ limit == 20 }"><core:out value="selected"/></core:if>>20</option>
+					<option <core:if test="${ limit == 30 }"><core:out value="selected"/></core:if>>30</option>
+					<option <core:if test="${ limit == 40 }"><core:out value="selected"/></core:if>>40</option>
+					<option <core:if test="${ limit == 50 }"><core:out value="selected"/></core:if>>50</option>
 				</select>
 				<button type="submit">Show</button>
 			</form>
