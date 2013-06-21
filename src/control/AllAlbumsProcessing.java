@@ -36,9 +36,8 @@ public class AllAlbumsProcessing extends HttpServlet {
 				redirect = "allAlbums.jsp";
 			}
 		}
-
 		request.getSession().removeAttribute("album");
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
 		dispatcher.forward(request, response);
 	}
@@ -61,8 +60,6 @@ public class AllAlbumsProcessing extends HttpServlet {
 		Set<Medium> set = (TreeSet<Medium>)req.getSession().getAttribute("shoppingBasket");
 		set.addAll(sqlController.getAllMediaFromAlbum(new Integer(req.getParameter("id"))));
 		req.getSession().setAttribute("shoppingBasket", set);
-		System.out.println(req.getRequestURL().toString());
-		redirect="AllAlbumsProcessing";
 		}
 		else if (req.getParameter("newType")!= null){
 			redirect = "new_type.jsp";
@@ -78,7 +75,7 @@ public class AllAlbumsProcessing extends HttpServlet {
 			req.setAttribute("back", "AllAlbumsProcessing");
 			redirect = "shoppingBasket.jsp";
 		}
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
 		dispatcher.forward(req, resp);       
 	} 

@@ -29,18 +29,25 @@ public class AllMediaProcessing extends HttpServlet {
 		}
 		if (request.getParameter("back")!=null&& request.getParameter("back")!="" )
 		{
+
 			redirect = "/albumDetails.jsp";
 			try{
 	        request.setAttribute("album", sqlController.getObjectById("model.Album", new Integer(request.getParameter("back"))));
 			}
 			catch (Exception e) {
-				redirect = "/allMedia.jsp";
+
+				if (request.getParameter("back").toString().equals("ShoppingBasket"))
+				{
+					redirect="shoppingBasket.jsp";
+				}
+				else
+					redirect = "/allMedia.jsp";
 			}
 		}
 
 
 		request.getSession().removeAttribute("medium");
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
 		dispatcher.forward(request, response);
 	}
@@ -66,6 +73,7 @@ public class AllMediaProcessing extends HttpServlet {
 			req.getSession().setAttribute("shoppingBasket", set);
 			this.doGet(req, resp);
 			return;
+
 		}
 		else if (req.getParameter("play")!= null){
 			
@@ -96,7 +104,7 @@ public class AllMediaProcessing extends HttpServlet {
 			req.setAttribute("back", "AllMediaProcessing");
 			redirect = "shoppingBasket.jsp";
 		}
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
 		dispatcher.forward(req, resp);       
 	} 

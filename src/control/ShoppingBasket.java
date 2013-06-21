@@ -22,11 +22,12 @@ public class ShoppingBasket extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
+		
 		String redirect = "";
 		
 		if (req.getParameter("back")!=null)
 			redirect = req.getParameter("back");
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
 		dispatcher.forward(req, resp);   
 		
@@ -41,6 +42,7 @@ public class ShoppingBasket extends HttpServlet {
 		if (req.getParameter("details")!= null){
 			redirect = "mediumDetails.jsp";
 			
+			req.setAttribute("back", "ShoppingBasket");
 	        Integer id = new Integer(req.getParameter("id"));	 
 	        req.setAttribute("medium", sqlController.getObjectById("model.Medium", id));
 		}
@@ -81,7 +83,7 @@ public class ShoppingBasket extends HttpServlet {
 		else if (req.getParameter("back")!= null){
 			redirect = "AllMediaProcessing";
 		}
-		
+
 		RequestDispatcher dispatcher = req.getRequestDispatcher(redirect);
 		dispatcher.forward(req, resp);       
 	} 
