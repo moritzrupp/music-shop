@@ -60,7 +60,6 @@ public class Album {
 	 * @return the mId
 	 */
 	
-	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
@@ -103,7 +102,6 @@ public class Album {
 	
 	/**
 	 * @return the mMediaList
-	 * TODO Es muss programmatisch kontrolliert werden, dass mindestens ein Titel im Album enthalten ist.
 	 */
 	@OneToMany(mappedBy="album", fetch=FetchType.EAGER)
 	public List<Medium> getMediaList() {

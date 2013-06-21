@@ -56,7 +56,6 @@ public class Medium implements Comparable{
 		this.mSold = 0;
 	}
 
-	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")

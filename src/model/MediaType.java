@@ -32,7 +32,6 @@ public class MediaType {
 		this.mAudio = mAudio;
 	}
 	
-	// TODO PK generation doesn't work properly. Has to be fixed in order to retrieve the correct values from Oracle sequences.
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
